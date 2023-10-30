@@ -1,0 +1,51 @@
+body {
+    background-color: var(--primary-color);
+}
+
+.form-control {
+    width: 18rem !important;
+}
+
+.btn {
+    margin-top: 1rem !important;
+}
+
+.btn-card {
+    margin-top: 0 !important;
+}
+
+.left-queries {
+    justify-content: center;
+    flex-direction: column;
+    align-items: flex-start;
+    display: grid
+}
+
+div.col-sm>div.container:not(:first-child) {
+    margin-top: 1rem;
+}
+
+.white {
+    color: white !important;
+    text-shadow: 1px 1px 0 black, -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black;
+}
+
+.rec-outfits {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.card {
+    margin: 0 5px;
+}
+
+@media screen and (max-width: 900px) {
+    .side-element {
+        display: none;
+    }
+
+    section.container>h1 {
+        font-size: 25px !important;
+    }
+}

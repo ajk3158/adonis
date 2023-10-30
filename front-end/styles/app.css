@@ -1,0 +1,247 @@
+/* Purpose: General CSS file that contains rules that should be applied for every web page on ADONIS */
+
+/* Declaring necessary CSS variables */
+:root {
+    --font-base: Georgia, serif;
+    --primary-color: #7f3e98;
+    --secondary-color: #734f96;
+    --button-color: rgb(100, 181, 191);
+    --white-color: #fffcf0;
+}
+
+/* To be applied to all elements on page */
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    scroll-behavior: smooth;
+    font-family: var(--font-base);
+}
+
+/* To be applied to every body used in all web pages*/
+body {
+    background-color: var(--primary-color) !important;
+    justify-content: center;
+    align-items: center;
+}
+
+a {
+    text-decoration: none !important;
+}
+
+/* CSS to design app's logo */
+.app-logo {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding: 2rem 0 8rem;
+}
+
+.app-brand {
+    color: white;
+    z-index: 1;
+    margin-top: 30px;
+    text-shadow: 2px 2px 0 black, -2px -2px 0 black, 2px -2px 0 black, -2px 2px 0 black;
+    font-size: 90px !important;
+    font-weight: 600;
+}
+
+.app-brand-image {
+    height: 300px;
+    width: 300px;
+    position: absolute;
+    top: 0;
+    z-index: 0;
+}
+
+section {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+h1 {
+    color: var(--white-color) !important;
+    font-weight: 600 !important;
+    font-size: 60px !important;
+    text-shadow: 1px 1px 0 black, -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black;
+}
+
+h2 {
+    color: var(--white-color) !important;
+    font-weight: 600 !important;
+    font-size: 30px !important;
+    text-shadow: 1px 1px 0 black, -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black;
+}
+
+form {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: var(--white-color);
+    width: 100%;
+    font-size: 20px !important;
+    display: inline-flex;
+    flex-direction: column;
+
+    .form-group {
+        margin: 0.5rem 0.5rem;
+    }
+
+    .form-control {
+        width: 30rem;
+    }
+
+}
+
+.form-range {
+    width: 100%;
+}
+
+input[type="range"] {
+    accent-color: coral;
+}
+
+
+.form-text {
+    color: var(--white-color) !important;
+}
+
+.form-control-name {
+    width: 20rem !important;
+}
+
+.form-submit-btn {
+    margin-top: 10px;
+}
+
+.form-control-number {
+    width: 10rem !important;
+}
+
+.navbar {
+    background-color: #7a2499 !important;
+    border: 1px solid rgba(243, 234, 255, 0.502) !important;
+    z-index: 2;
+    position: fixed !important;
+    width: 100%;
+    top: 0;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.app-navbar-links {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem 0;
+    list-style: none;
+}
+
+@media screen and (max-width: 900px) {
+    .app-navbar-links {
+        display: none;
+    }
+}
+
+.nav-item {
+    margin: 0 1rem;
+    cursor: pointer;
+    flex-direction: column;
+}
+
+.nav-link {
+    color: var(--white-color) !important;
+    text-decoration: none;
+    flex-direction: column;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+.navbar-toggler {
+    margin-right: 2rem;
+}
+
+.btn {
+    background-color: var(--button-color) !important;
+    text-transform: uppercase;
+}
+
+label {
+
+    color: var(--white-color);
+}
+
+.nav-primary {
+    position: absolute;
+    left: 0;
+    font-size: 30px;
+}
+
+.nav-profile {
+    position: absolute !important;
+    right: 0;
+    font-size: 20px;
+}
+
+.dropdown-menu {
+    background-color: var(--secondary-color) !important;
+}
+
+.dropdown-item {
+    color: white !important;
+    text-transform: uppercase;
+}
+
+.dropdown-item:hover {
+    background-color: var(--button-color) !important;
+}
+
+/*Expand button in color preferences*/
+.btn-expand {
+    color: white;
+    background-color: var(--primary-color);
+    border: none;
+}
+
+
+/* Mobile */
+@media screen and (max-width: 768px) {
+    .app-brand {
+        font-size: 50px !important;
+    }
+
+    .app-logo {
+        padding: 1rem 0 4rem;
+    }
+
+    .app-brand-image {
+        height: 200px;
+        width: 200px;
+    }
+
+    h1 {
+        font-size: 40px !important;
+    }
+
+    h2 {
+        font-size: 24px !important;
+    }
+
+    form {
+        .form-control {
+            width: 100%;
+        }
+
+        .form-control-name,
+        .form-control-number {
+            width: 100% !important;
+        }
+    }
+
+    .navbar-toggler {
+        margin-right: 1rem;
+    }
+}

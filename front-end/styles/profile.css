@@ -1,0 +1,43 @@
+/*Side Navigation Bar*/
+.navbar-side {
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #7f3e98;
+    padding-top: 20px;
+}
+
+.navbar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Style the navigation links */
+.navbar-side a {
+    display: block;
+    padding: 15px 20px;
+    color: #fff;
+    text-decoration: none;
+    font-family: Georgia, serif;
+}
+
+/* Change the color of the links on hover */
+.navbar-side a:hover {
+    background-color: rgb(100, 181, 191)
+}
+
+*:disabled {
+    background-color: dimgrey;
+    color: linen;
+    opacity: 1;
+}
+
+@media screen and (max-width: 900px) {
+    .navbar-side {
+        display: none;
+    }
+
+}
