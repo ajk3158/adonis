@@ -35,10 +35,8 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="nav-item nav-primary">
-      <a class="nav-link" href="?homepage">ADONIS</a>
+      <a class="nav-link" href="?command=homepage">ADONIS</a>
     </div>
-
-    <!--Middle navigation links-->
     <div class="app-navbar-links collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav">
         <li class="nav-item">
@@ -49,16 +47,15 @@
         </li>
       </ul>
 
-      <!--Drop down navigation links-->
       <div class="nav-item dropdown nav-profile">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-bs-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">
-          Welcome, John
+          Welcome, Alex
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="profile.html">View Profile</a>
-          <a class="dropdown-item" href="profile.html">Edit Profile</a>
-          <a class="dropdown-item" href="login.html">Logout</a>
+          <a class="dropdown-item" href="?command=viewProfile">View Profile</a>
+          <a class="dropdown-item" href="?command=editProfile">Edit Profile</a>
+          <a class="dropdown-item" href="?command=logout">Logout</a>
         </div>
       </div>
 

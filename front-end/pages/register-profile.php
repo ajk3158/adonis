@@ -55,7 +55,7 @@
     <!-- Website logo -->
     <div class="app-logo">
       <h1 class="app-brand">ADONIS</h1>
-      <img class="app-brand-image" alt="ADONIS logo" src="../assets/logo.png">
+      <img class="app-brand-image" alt="ADONIS logo" src="front-end/assets/logo.png">
     </div>
 
     <!-- Primary Register Profile Content -->

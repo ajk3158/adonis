@@ -5,8 +5,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="../styles/app.css">
-  <link rel="stylesheet" href="../styles/login.css">
+  <link rel="stylesheet" href="front-end/styles/app.css">
+  <link rel="stylesheet" href="front-end/styles/login.css">
   <!-- Webpage Title -->
   <title>Login - ADONIS</title>
 
@@ -54,7 +54,7 @@
     <!-- Website logo -->
     <div class="app-logo">
       <h1 class="app-brand">ADONIS</h1>
-      <img class="app-brand-image" alt="ADONIS logo" src="../assets/logo.png">
+      <img class="app-brand-image" alt="ADONIS logo" src="front-end/assets/logo.png">
     </div>
 
     <!-- Primary Login Section -->
@@ -63,19 +63,31 @@
 
       <small class="form-text">Revolutionize your fashion, Take control of your wear.</small>
 
+      <?php echo $errorMessage; ?>
+
       <!-- Form for User Login -->
-      <form>
+      <form action="?command=login" method="post">
+
+
+        <!-- Email Input -->
+        <div class="form-group">
+          <label for="username">Email</label>
+          <input type="text" class="form-control form-control-name" id="email" name="email"
+            placeholder="Example@gmail.com">
+        </div>
 
         <!-- Username Input -->
         <div class="form-group">
           <label for="username">Username</label>
-          <input type="text" class="form-control form-control-name" id="username" placeholder="Username">
+          <input type="text" class="form-control form-control-name" id="username" name="username"
+            placeholder="Username">
         </div>
 
         <!-- Password Input -->
         <div class="form-group">
           <label for="password">Password</label>
-          <input type="password" class="form-control form-control-name" id="password" placeholder="Password">
+          <input type="password" class="form-control form-control-name" id="password" name="password"
+            placeholder="Password">
         </div>
         <div>
           <button type="submit" class="form-submit-btn btn">Login</button>

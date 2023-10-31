@@ -6,6 +6,8 @@ class AdonisController
     private $db;
     private $input = [];
 
+    private $errorMessage = "";
+
 
 
     /**
@@ -22,7 +24,7 @@ class AdonisController
     // public function request_Colors($colorid=null){
     //     if ($colorid === null) {
     //         $res = $this->db->query("select * from questions order by random() limit 1;");
-            
+
     //         return [ "id" => $res[0]["id"], "question" => $res[0]["question"]];
     //     }
     //     if (is_numeric($colorid)) {
@@ -65,6 +67,9 @@ class AdonisController
             case "register":
                 $this->register();
                 break;
+            case "showRegister":
+                $this->showRegister();
+                break;
             case "viewProfile":
                 $this->viewProfile();
                 break;
@@ -77,7 +82,7 @@ class AdonisController
             case "logout":
                 $this->logout();
             default:
-                $this->login();
+                $this->showLogin();
                 break;
         }
     }
@@ -85,13 +90,52 @@ class AdonisController
 
 
     /**
-     * Handle user log-in
+     * Handle user registration and log-in
      */
     public function login()
     {
-        $this->checkUserInfo();
+        // need a name, email, and password
+        if (
+            isset($_POST["email"]) && !empty($_POST["email"]) &&
+            isset($_POST["username"]) && !empty($_POST["username"]) &&
+            isset($_POST["password"]) && !empty($_POST["password"])
+        ) {
 
-        include("front-end/pages/homepage.php");
+            // Check if user is in database
+            $res = $this->db->query("select * from users where email = $1;", $_POST["email"]);
+            if (empty($res)) {
+                $this->register();
+                return;
+            } else {
+                // User was in the database, verify password
+                if (password_verify($_POST["password"], $res[0]["password"])) {
+                    // Password was correct
+                    $_SESSION["email"] = $res[0]["email"];
+                    $_SESSION["username"] = $res[0]["username"];
+                    header("Location: ?command=homepage");
+                    return;
+                } else {
+                    $this->errorMessage = "<div class=\"alert alert-danger\" role=\"alert\">
+                Password is incorrect!
+                </div>";
+                }
+            }
+        } else {
+            $this->errorMessage = "<div class=\"alert alert-danger\" role=\"alert\">
+            Email, Username, and Password are all required!
+            </div>";
+        }
+        // If something went wrong, show the welcome page again
+        $this->showLogin();
+    }
+
+    /**
+     * Handle user registration
+     */
+    public function showLogin()
+    {
+        $errorMessage = $this-> errorMessage; 
+        include("front-end/pages/login.php");
     }
 
     /**
@@ -101,7 +145,46 @@ class AdonisController
     {
         $this->setUserInfo();
 
-        include("front-end/pages/login.php");
+        if (
+            isset($_POST["username"]) && !empty($_POST["username"]) &&
+            isset($_POST["email"]) && !empty($_POST["email"]) &&
+            isset($_POST["password"]) && !empty($_POST["password"])
+        ) {
+
+            // Check if user is in database
+            $res = $this->db->query("select * from users where email = $1;", $_POST["email"]);
+            if (empty($res)) {
+                // User was not there, so insert them
+                $this->db->query(
+                    "insert into users (name, email, password) values ($1, $2, $3);",
+                    $_POST["username"],
+                    $_POST["email"],
+                    password_hash($_POST["password"], PASSWORD_DEFAULT)
+                );
+                $_SESSION["username"] = $_POST["username"];
+                $_SESSION["email"] = $_POST["email"];
+                // Send user to the login page
+                header("Location: ?command=showLogin");
+                return;
+            } else{
+                $this->errorMessage = "<div class=\"alert alert-danger\" role=\"alert\">
+                User already exists!
+                </div>";
+            }
+        } else {
+            $this->errorMessage = "<div class=\"alert alert-danger\" role=\"alert\">
+            Email, Username, and Password are all required!
+            </div>";
+        }
+        $this -> showRegister();
+    }
+
+    /**
+     * Checks user information during log-in
+     */
+    public function showRegister()
+    {
+        include("front-end/pages/register-profile.php");
     }
 
     /**
@@ -109,13 +192,14 @@ class AdonisController
      */
     public function checkUserInfo()
     {
-        
+
     }
 
     /**
      * Allows user to view profile
      */
-    public function viewProfile(){
+    public function viewProfile()
+    {
 
         include("front-end/pages/profile.php");
 
@@ -124,7 +208,8 @@ class AdonisController
     /**
      * Allows user to edit profile
      */
-    public function editProfile(){
+    public function editProfile()
+    {
 
         include("front-end/pages/edit-profile.php");
 
