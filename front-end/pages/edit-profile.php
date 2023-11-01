@@ -104,7 +104,9 @@
         <input type="email" class="form-control" id="edit_email" name = "edit_email" placeholder="JohnDoe21@gmail.com" >
       </div>
      
-
+      <div>
+          <button type="submit" class="form-submit-btn btn">Update</button>
+      </div>
       <!-- Edit Profile Button
       <div class="form-group">
         <a class="forgot-link" href="#"><u>Edit Profile</u></a>

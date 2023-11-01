@@ -91,7 +91,7 @@
         </div>
         <div>
           <button type="submit" class="form-submit-btn btn">Login</button>
-          <button formaction="register-profile.html" class="form-submit-btn btn">Register</button>
+          <button formaction="register-profile.php" class="form-submit-btn btn">Register</button>
         </div>
 
         <div class="form-group">
