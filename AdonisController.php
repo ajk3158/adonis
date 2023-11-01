@@ -80,6 +80,9 @@ class AdonisController
             case "viewColorPrefs":
                 $this->viewColorPreferences();
                 break;
+            case "updateProfile":
+                $this->updateProfile();
+                break;
             case "editProfile":
                 $this->editProfile();
                 break;
@@ -127,6 +130,7 @@ class AdonisController
                     $_SESSION["email"] = $res[0]["email"];
                     $_SESSION["username"] = $res[0]["username"];
                     $_SESSION["firstname"] = $res[0]["firstname"];
+                    $_SESSION["age"] = $res[0]["age"];
                     $_SESSION["lastname"] = $res[0]["lastname"];
                     $this -> showHome();
                     return;
@@ -151,7 +155,6 @@ class AdonisController
     //update information of specific users in database
     public function updateProfile(){
         if (isset($_SESSION["id"])){
-            $res = $this->db->query("select * from users where email = $1;", $_SESSION["id"]);
 
             //Email update
             if (isset($_POST["edit_email"]) && !empty($_POST["edit_email"])){
@@ -233,7 +236,18 @@ class AdonisController
                     $this->db->query("update users set lastname = $1 where id = $2", null,$_SESSION["id"]);
                 }
             }
+            $res = $this->db->query("select * from users where id = $1;", $_SESSION["id"]);
+            $_SESSION["email"] = $res[0]["email"];
+        $_SESSION["username"] = $res[0]["username"];
+        $_SESSION["firstname"] = $res[0]["firstname"];
+        $_SESSION["lastname"] = $res[0]["lastname"];
+        $_SESSION["age"] = $res[0]["age"];
+
+        $this -> viewProfile();
+        return;
         }
+
+        $this -> showLogin();
         
     }
 
@@ -262,6 +276,7 @@ class AdonisController
         ) {
 
             if(preg_match("/^[a-zA-Z0-9\/.-]+@[a-zA-Z0-9\/-]+.[a-zA-Z0-9\/-]+$/", $_POST["email"])){
+                
 
             // Check if user is in database
             $res = $this->db->query("select * from users where email = $1;", $_POST["email"]);
@@ -276,13 +291,14 @@ class AdonisController
                     $_POST["lastname"],
                     password_hash($_POST["password"], PASSWORD_DEFAULT)
                 );
+                $res = $this->db->query("select * from users where email = $1;", $_POST["email"]);
                 $_SESSION["username"] = $_POST["username"];
                 $_SESSION["email"] = $_POST["email"];
                 $_SESSION["age"] = $_POST["age"];
                 $_SESSION["firstname"] = $_POST["firstname"];
                 $_SESSION["lastname"] = $_POST["lastname"];
                 // Send user to the login page
-                header("Location: ?command=showLogin");
+                $this -> showLogin();
                 return;
             } else{
                 $this->errorMessage = "<div class=\"alert alert-danger\" role=\"alert\">
@@ -319,6 +335,10 @@ class AdonisController
     public function viewProfile()
     {
         $firstname = $_SESSION["firstname"];
+        $email = $_SESSION["email"];
+        $username = $_SESSION["username"];
+        $lastname = $_SESSION["lastname"];
+        $age = $_SESSION["age"];
         include("front-end/pages/profile.php");
 
     }

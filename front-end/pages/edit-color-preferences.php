@@ -7,9 +7,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="front-end/styles/app.css">
   <link rel="stylesheet" href="front-end/styles/profile.css">
+  <link rel="stylesheet" href="front-end/styles/login.css">
+
 
   <!-- Webpage Title -->
-  <title>User Profile - ADONIS</title>
+  <title>Color Preferences Page - ADONIS</title>
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -18,13 +20,15 @@
     crossorigin="anonymous"></script>
 
   <meta name="author" content="Alex Kim, Jason Nguyen">
-  <meta name="description" content="User Profile page for Adonis members where they can view personal information">
+  <meta name="description" content="this is the color preferences part in a users profile, where
+  users are able to specify which colors they prefer">
   <meta name="keywords" content="Clothing, Fashion, Homepage">
 
 </head>
 
 <body class="text-center">
-  <!-- Navigation Bar -->
+
+  <!--Upper navigation bar-->
   <nav class="navbar navbar-expand-lg">
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-target="#navbarNavDropdown"
       aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -57,12 +61,9 @@
 
     </div>
   </nav>
-
-  <!-- Primary Content for Login -->
   <div style="margin-top: 6rem">
 
-
-    <!-- Side Navigtion Bar -->
+    <!--Side navigation bar for user profile-->
     <div class=navbar-side>
       <ul style="list-style-type: none; margin-top: 5rem;">
         <li><a href="?command=viewProfile">Profile</a></li>
@@ -72,38 +73,28 @@
       </ul>
     </div>
 
-    <!-- Form Displaying Profile Information -->
-    <form action="?command=editProfile" method="post">
 
+    <form>
+
+      <!--Checkbox code that displays in color preferences-->
       <div class="form-group">
-        <label for="first-name-input">First Name</label>
-        <input type="text" class="form-control form-control-name " id="first-name-input" placeholder=<?= $firstname ?> disabled>
-      </div>
+        <label>Color Preferences</label><br>
+        <input type="checkbox" id="color-pref1" class="" name="color-pref1" checked>
+        <label for="color-pref1">Red</label><br>
 
-      <div class="form-group">
-        <label for="last-name-input">Last Name</label>
-        <input type="text" class="form-control form-control-name" id="last-name-input" placeholder=<?= $lastname ?> disabled>
-      </div>
+        <input type="checkbox" id="color-pref2" class="" name="color-pref2" checked>
+        <label for="color-pref2">Black</label><br>
 
-      <div class="form-group">
-        <label for="age">Age</label>
-        <input type="text" id="age" name="age" class="form-control form-control-name" placeholder=<?= $age ?> disabled>
+        <input type="checkbox" id="color-pref3" class="" name="color-pref3">
+        <label for="color-pref3">White</label><br>
 
-
+        <!--To DO, collapsable button that shows more color options-->
+        <button class="btn-expand collapsible">...</button>
       </div>
       <div class="form-group">
-        <label for="username">Username</label>
-        <input type="text" class="form-control form-control-name" id="username" placeholder=<?= $username ?> disabled>
+        <!--Color preference link-->
+        <a class="forgot-link" href="#"><u>Edit Color Preferences</u></a>
       </div>
-
-      <div class="form-group">
-        <label for="email-input">Email address</label>
-        <input type="email" class="form-control" id="email-input" placeholder=<?= $email ?> disabled>
-      </div>
-     
-
-      <!-- Edit Profile Button-->
-        <button class="btn btn-outline-dark" type="submit">Edit Profile</button>
     </form>
 
   </div>

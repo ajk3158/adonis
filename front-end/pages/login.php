@@ -30,7 +30,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="nav-item nav-primary">
-      <a class="nav-link" href="#">ADONIS</a>
+      <a class="nav-link" href="?command=homepage">ADONIS</a>
     </div>
     <div class="app-navbar-links collapse navbar-collapse" id="navbarNavDropdown">
 
@@ -41,8 +41,8 @@
           Login
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="login.html">Login</a>
-          <a class="dropdown-item" href="register-profile.html">Register</a>
+        <a class="dropdown-item" href="?command=showLogin">Login</a>
+          <a class="dropdown-item" href="?command=showRegister">Register</a>
         </div>
       </div>
 
@@ -91,7 +91,7 @@
         </div>
         <div>
           <button type="submit" class="form-submit-btn btn">Login</button>
-          <button formaction="register-profile.html" class="form-submit-btn btn">Register</button>
+          <button formaction="?command=showRegister" class="form-submit-btn btn">Register</button>
         </div>
 
         <div class="form-group">

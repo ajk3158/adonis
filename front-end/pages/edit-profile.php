@@ -1,6 +1,4 @@
-<?php
-  include("AdonisController.php");
-?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -80,31 +78,31 @@
 
       <div class="form-group">
         <label for="edit_firstname">First Name</label>
-        <input type="text" class="form-control form-control-name " id="edit_firstname" name = edit_firstname placeholder="John" >
+        <input type="text" class="form-control form-control-name " id="edit_firstname" name = edit_firstname placeholder="first name" >
       </div>
 
       <div class="form-group">
         <label for="edit_lastname">Last Name</label>
-        <input type="text" class="form-control form-control-name" id="edit_lastname" name= edit_lastname placeholder="Doe" >
+        <input type="text" class="form-control form-control-name" id="edit_lastname" name= edit_lastname placeholder="last name" >
       </div>
 
       <div class="form-group">
         <label for="edit_age">Age</label>
-        <input type="text" id="edit_age" name="edit_age" class="form-control form-control-name" placeholder="21" >
+        <input type="text" id="edit_age" name="edit_age" class="form-control form-control-name" placeholder="##" >
       </div>
 
       <div class="form-group">
         <label for="edit_username">Username</label>
-        <input type="text" class="form-control form-control-name" id="edit_username" name = "edit_username placeholder="JohnDoe21" >
+        <input type="text" class="form-control form-control-name" id="edit_username" name = "edit_username" placeholder="example" >
       </div>
 
       <div class="form-group">
         <label for="edit_email">Email address</label>
-        <input type="email" class="form-control" id="edit_email" name = "edit_email" placeholder="JohnDoe21@gmail.com" >
+        <input type="email" class="form-control" id="edit_email" name = "edit_email" placeholder="example@gmail.com" >
       </div>
      
       <div>
-          <button type="submit" class="form-submit-btn btn">Update</button>
+          <button class="btn btn-outline-dark" type="submit">Update</button>
       </div>
       <!-- Edit Profile Button
       <div class="form-group">
