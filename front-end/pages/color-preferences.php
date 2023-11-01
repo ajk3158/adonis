@@ -68,32 +68,39 @@
       <ul style="list-style-type: none; margin-top: 5rem;">
         <li><a href="?command=viewProfile">Profile</a></li>
         <li><a href="#">Password & Security</a></li>
-        <li><a href="?command=viewColorPrefs">Color Preferences</a></li>
+        <li><a href="?command=viewColorPreferences">Color Preferences</a></li>
         <li><a href="#">Color Rejections</a></li>
       </ul>
     </div>
 
 
-    <form>
+    <form action="?command=viewColorEdits" method="post">
 
       <!--Checkbox code that displays in color preferences-->
       <div class="form-group">
+        
         <label>Color Preferences</label><br>
-        <input type="checkbox" id="color-pref1" class="" name="color-pref1" checked disabled>
-        <label for="color-pref1">Red</label><br>
 
-        <input type="checkbox" id="color-pref2" class="" name="color-pref2" checked disabled>
-        <label for="color-pref2">Black</label><br>
-
-        <input type="checkbox" id="color-pref3" class="" name="color-pref3" disabled>
-        <label for="color-pref3">White</label><br>
+        <?php foreach($colors as $color => $preferred):
+          if($color == "id") {
+            continue;
+          }?>
+            <input type="checkbox" id="color<?= $color ?>" name = "color<?= $color ?>"  disabled <?php 
+                  if ($preferred == "true" ){
+                    echo 'checked';
+                  }
+                    ?>>
+        <label for="color<?= $color ?>"><?= $color ?></label><br>
+        <?php endforeach; ?>
 
         <!--To DO, collapsable button that shows more color options-->
-        <button class="btn-expand collapsible">...</button>
+        <div>
+          <button  class="btn btn-outline-dark">Edit Color</button>
+        </div>
       </div>
       <div class="form-group">
         <!--Color preference link-->
-        <a class="forgot-link" href="#"><u>Edit Color Preferences</u></a>
+        <a class="forgot-link" href=""><u>Edit Color Preferences</u></a>
       </div>
     </form>
 

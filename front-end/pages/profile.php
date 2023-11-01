@@ -67,7 +67,7 @@
       <ul style="list-style-type: none; margin-top: 5rem;">
         <li><a href="?command=viewProfile">Profile</a></li>
         <li><a href="#">Password & Security</a></li>
-        <li><a href="?command=viewColorPrefs">Color Preferences</a></li>
+        <li><a href="?command=viewColorPreferences">Color Preferences</a></li>
         <li><a href="#">Color Rejections</a></li>
       </ul>
     </div>

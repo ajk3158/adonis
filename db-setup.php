@@ -28,7 +28,12 @@ $res = pg_query($dbHandle, "create sequence user_seq;");
 // Create tablse
 $res = pg_query($dbHandle, "create table colorPreferences (
             id int primary key,
-            colors    text
+            black boolean,
+            white boolean,
+            red boolean,
+            blue boolean,
+            brown boolean,
+            grey boolean
     );");
 $res = pg_query($dbHandle, "create table users (
             id int primary key default nextval('user_seq'),

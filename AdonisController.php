@@ -77,8 +77,14 @@ class AdonisController
             case "viewProfile":
                 $this->viewProfile();
                 break;
-            case "viewColorPrefs":
+            case "viewColorPreferences":
                 $this->viewColorPreferences();
+                break;
+            case "viewColorEdits":
+                $this->viewColorEdits();
+                break;
+            case "colorPref":
+                $this->colorPref();
                 break;
             case "updateProfile":
                 $this->updateProfile();
@@ -86,6 +92,7 @@ class AdonisController
             case "editProfile":
                 $this->editProfile();
                 break;
+            
             case "homepage":
                 $this->showHome();
                 break;
@@ -251,6 +258,63 @@ class AdonisController
         
     }
 
+    public function colorPref(){
+
+        //Turn database columnms into an array and loop
+        //Color1
+       /* if (isset($_POST["blackCheck"])){
+            $this->db->query("update colorPreferences set black = true where id = $1",$_SESSION["id"]);
+        }
+        else{
+            $this->db->query("update colorPreferences set black = false where id = $1",$_SESSION["id"]);
+        }
+        //Color2
+        if (isset($_POST["whiteCheck"])){
+            $this->db->query("update colorPreferences set white = true where id = $1",$_SESSION["id"]);
+        }
+        else{
+            $this->db->query("update colorPreferences set white = false where id = $1",$_SESSION["id"]);
+        }
+        //Color3
+        if (isset($_POST["redCheck"])){
+            $this->db->query("update colorPreferences set red = true where id = $1",$_SESSION["id"]);
+        }
+        else{
+            $this->db->query("update colorPreferences set red = false where id = $1",$_SESSION["id"]);
+        }
+        //Color4
+        if (isset($_POST["blueCheck"])){
+            $this->db->query("update colorPreferences set blue = true where id = $1",$_SESSION["id"]);
+        }
+        else{
+            $this->db->query("update colorPreferences set blue = false where id = $1",$_SESSION["id"]);
+        }
+        //Color5
+        if (isset($_POST["brownCheck"])){
+            $this->db->query("update colorPreferences set brown = true where id = $1",$_SESSION["id"]);
+        }
+        else{
+            $this->db->query("update colorPreferences set brown = false where id = $1",$_SESSION["id"]);
+        }
+        //Color6
+        if (isset($_POST["greyCheck"])){
+            $this->db->query("update colorPreferences set grey = true where id = $1",$_SESSION["id"]);
+        }
+        else{
+            $this->db->query("update colorPreferences set grey = false where id = $1",$_SESSION["id"]);
+        }
+        */
+        $colors = array('black', 'white', 'red', 'blue', 'brown', 'grey');
+        foreach ($colors as $color) {
+            $checkboxName = $color . 'Check';
+            $value = isset($_POST[$checkboxName]) ? 'true' : 'false';
+            $query = "UPDATE colorPreferences SET $color = $value WHERE id = " . $_SESSION["id"];
+            $this->db->query($query);
+        }
+        $this->viewColorPreferences();
+
+    }
+
     /**
      * Handle user registration
      */
@@ -292,6 +356,11 @@ class AdonisController
                     password_hash($_POST["password"], PASSWORD_DEFAULT)
                 );
                 $res = $this->db->query("select * from users where email = $1;", $_POST["email"]);
+                $this -> db->query(
+                    "insert into colorPreferences (id, black, white, red, blue, brown, grey) values ($1, false,false,false,false,false,false);",
+                    $res[0]["id"]
+                    
+                );
                 $_SESSION["username"] = $_POST["username"];
                 $_SESSION["email"] = $_POST["email"];
                 $_SESSION["age"] = $_POST["age"];
@@ -348,9 +417,16 @@ class AdonisController
      */
     public function viewColorPreferences()
     {
+        $colors = $this->db->query("select * from colorPreferences where id = $1;",$_SESSION["id"]);
+        $colors = $colors[0];
         $firstname = $_SESSION["firstname"];
         include("front-end/pages/color-preferences.php");
 
+    }
+
+    public function viewColorEdits(){
+        $firstname = $_SESSION["firstname"];
+        include("front-end/pages/edit-color-preferences.php");
     }
 
     /**
