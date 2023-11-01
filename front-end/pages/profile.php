@@ -46,7 +46,7 @@
       <div class="nav-item dropdown nav-profile">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-bs-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">
-          Welcome, Alex
+          <?php echo $firstname ?>'s Profile
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
           <a class="dropdown-item" href="?command=viewProfile">View Profile</a>
@@ -64,17 +64,16 @@
 
     <!-- Side Navigtion Bar -->
     <div class=navbar-side>
-      <ul style="list-style-type: none;">
-        <li><a href="#">Dud</a></li>
-        <li><a href="profile.html">Profile</a></li>
+      <ul style="list-style-type: none; margin-top: 5rem;">
+        <li><a href="?command=viewProfile">Profile</a></li>
         <li><a href="#">Password & Security</a></li>
-        <li><a href="color-preferences.html">Color Preferences</a></li>
+        <li><a href="?command=viewColorPrefs">Color Preferences</a></li>
         <li><a href="#">Color Rejections</a></li>
       </ul>
     </div>
 
     <!-- Form Displaying Profile Information -->
-    <form>
+    <form action="?command=editProfile" method="post">
 
       <div class="form-group">
         <label for="first-name-input">First Name</label>
@@ -104,9 +103,7 @@
      
 
       <!-- Edit Profile Button-->
-      <div class="form-group">
-        <a class="forgot-link" href="?command=edit-profile"><u>Edit Profile</u></a>
-      </div>
+        <button class="btn btn-outline-dark" type="submit">Edit Profile</button>
     </form>
 
   </div>

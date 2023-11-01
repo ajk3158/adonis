@@ -72,7 +72,7 @@
         <!-- Email Input -->
         <div class="form-group">
           <label for="username">Email</label>
-          <input type="text" class="form-control form-control-name" id="email" name="email"
+          <input type="email" class="form-control form-control-name" id="email" name="email"
             placeholder="Example@gmail.com">
         </div>
 
@@ -91,7 +91,7 @@
         </div>
         <div>
           <button type="submit" class="form-submit-btn btn">Login</button>
-          <button formaction="register-profile.html" class="form-submit-btn btn">Register</button>
+          <button formaction="?command=showRegister" class="form-submit-btn btn">Register</button>
         </div>
 
         <div class="form-group">

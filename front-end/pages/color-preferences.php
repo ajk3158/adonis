@@ -50,7 +50,7 @@
       <div class="nav-item dropdown nav-profile">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-bs-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">
-          Welcome, Alex
+          <?php echo $firstname ?>'s Profile
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
           <a class="dropdown-item" href="?command=viewProfile">View Profile</a>
@@ -63,20 +63,18 @@
   </nav>
   <div style="margin-top: 6rem">
 
+    <!--Side navigation bar for user profile-->
+    <div class=navbar-side>
+      <ul style="list-style-type: none; margin-top: 5rem;">
+        <li><a href="?command=viewProfile">Profile</a></li>
+        <li><a href="#">Password & Security</a></li>
+        <li><a href="?command=viewColorPrefs">Color Preferences</a></li>
+        <li><a href="#">Color Rejections</a></li>
+      </ul>
+    </div>
 
 
     <form>
-
-      <!--Side navigation bar for user profile-->
-      <div class=navbar-side>
-        <ul>
-          <li><a href="#">Home</a></li>
-          <li><a href="profile.html">Profile</a></li>
-          <li><a href="#">Password & Security</a></li>
-          <li><a href="#">Color Preferences</a></li>
-          <li><a href="#">Color Rejections</a></li>
-        </ul>
-      </div>
 
       <!--Checkbox code that displays in color preferences-->
       <div class="form-group">

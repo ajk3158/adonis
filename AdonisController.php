@@ -67,11 +67,17 @@ class AdonisController
             case "register":
                 $this->register();
                 break;
+            case "search":
+                $this->search();
+                break;
             case "showRegister":
                 $this->showRegister();
                 break;
             case "viewProfile":
                 $this->viewProfile();
+                break;
+            case "viewColorPrefs":
+                $this->viewColorPreferences();
                 break;
             case "editProfile":
                 $this->editProfile();
@@ -101,10 +107,16 @@ class AdonisController
             isset($_POST["password"]) && !empty($_POST["password"])
         ) {
 
+            if(preg_match("/^[a-zA-Z0-9\/.-]+@[a-zA-Z0-9\/-]+.[a-zA-Z0-9\/-]+$/", $_POST["email"])){
+
+
             // Check if user is in database
             $res = $this->db->query("select * from users where email = $1;", $_POST["email"]);
             if (empty($res)) {
-                $this->register();
+                $this->errorMessage = "<div class=\"alert alert-danger\" role=\"alert\">
+                Account doesn't exist!
+                </div>";
+                $this->showlogin();
                 return;
             } else {
                 // User was in the database, verify password
@@ -112,13 +124,19 @@ class AdonisController
                     // Password was correct
                     $_SESSION["email"] = $res[0]["email"];
                     $_SESSION["username"] = $res[0]["username"];
-                    header("Location: ?command=homepage");
+                    $_SESSION["firstname"] = $res[0]["firstname"];
+                    $_SESSION["lastname"] = $res[0]["lastname"];
+                    $this -> showHome();
                     return;
                 } else {
                     $this->errorMessage = "<div class=\"alert alert-danger\" role=\"alert\">
                 Password is incorrect!
                 </div>";
                 }
+            }} else {
+                $this->errorMessage = "<div class=\"alert alert-danger\" role=\"alert\">
+                Email invalid! Must be in the format example@mail.com!
+                </div>";
             }
         } else {
             $this->errorMessage = "<div class=\"alert alert-danger\" role=\"alert\">
@@ -143,26 +161,36 @@ class AdonisController
      */
     public function register()
     {
-        $this->setUserInfo();
 
         if (
+            isset($_POST["firstname"]) && !empty($_POST["firstname"]) &&
+            isset($_POST["lastname"]) && !empty($_POST["lastname"]) &&
+            isset($_POST["age"]) && !empty($_POST["age"]) &&
             isset($_POST["username"]) && !empty($_POST["username"]) &&
-            isset($_POST["email"]) && !empty($_POST["email"]) &&
-            isset($_POST["password"]) && !empty($_POST["password"])
+            isset($_POST["password"]) && !empty($_POST["password"]) &&
+            isset($_POST["email"]) && !empty($_POST["email"])
         ) {
+
+            if(preg_match("/^[a-zA-Z0-9\/.-]+@[a-zA-Z0-9\/-]+.[a-zA-Z0-9\/-]+$/", $_POST["email"])){
 
             // Check if user is in database
             $res = $this->db->query("select * from users where email = $1;", $_POST["email"]);
             if (empty($res)) {
                 // User was not there, so insert them
                 $this->db->query(
-                    "insert into users (name, email, password) values ($1, $2, $3);",
-                    $_POST["username"],
+                    "insert into users (email, username, age, firstname, lastname, password) values ($1, $2, $3, $4, $5, $6);",
                     $_POST["email"],
+                    $_POST["username"],
+                    $_POST["age"],
+                    $_POST["firstname"],
+                    $_POST["lastname"],
                     password_hash($_POST["password"], PASSWORD_DEFAULT)
                 );
                 $_SESSION["username"] = $_POST["username"];
                 $_SESSION["email"] = $_POST["email"];
+                $_SESSION["age"] = $_POST["age"];
+                $_SESSION["firstname"] = $_POST["firstname"];
+                $_SESSION["lastname"] = $_POST["lastname"];
                 // Send user to the login page
                 header("Location: ?command=showLogin");
                 return;
@@ -171,9 +199,14 @@ class AdonisController
                 User already exists!
                 </div>";
             }
+        }else {
+            $this->errorMessage = "<div class=\"alert alert-danger\" role=\"alert\">
+            Email invalid! Must be in the format example@mail.com!
+            </div>";
+        }
         } else {
             $this->errorMessage = "<div class=\"alert alert-danger\" role=\"alert\">
-            Email, Username, and Password are all required!
+            All fields are required!
             </div>";
         }
         $this -> showRegister();
@@ -184,15 +217,8 @@ class AdonisController
      */
     public function showRegister()
     {
+        $errorMessage = $this-> errorMessage; 
         include("front-end/pages/register-profile.php");
-    }
-
-    /**
-     * Checks user information during log-in
-     */
-    public function checkUserInfo()
-    {
-
     }
 
     /**
@@ -200,8 +226,18 @@ class AdonisController
      */
     public function viewProfile()
     {
-
+        $firstname = $_SESSION["firstname"];
         include("front-end/pages/profile.php");
+
+    }
+
+    /**
+     * Allows user to view their color preferences
+     */
+    public function viewColorPreferences()
+    {
+        $firstname = $_SESSION["firstname"];
+        include("front-end/pages/color-preferences.php");
 
     }
 
@@ -210,62 +246,42 @@ class AdonisController
      */
     public function editProfile()
     {
-
+        $firstname = $_SESSION["firstname"];
         include("front-end/pages/edit-profile.php");
 
     }
 
     /**
-     * Gets connection table and sets categories
-     * 
-     * Returns a table with random connections
+     * Allows user to edit profile
      */
-    private function setTable()
+    public function search()
     {
-        $_SESSION["categoryIDs"] = array_rand($this->categories, 4);
-
-
-        foreach ($_SESSION["categoryIDs"] as $index) {
-            // foreach($this -> categories[$index]["words"] as $word){
-            //     array_push($_SESSION["table"], $word);
-            // }
-            // array_push($_SESSION["tableCategories"]["wordIDs"], $this -> categories[$index]);
-            $set = (array) $this->categories[$index]["words"];
-            // array_push($_SESSION["table"], ...$set);
-            for ($x = 0; $x < sizeof($set); $x++) {
-                //rand int to randomize id
-                array_push($_SESSION["table"], $set[$x]);
-            }
-        }
-
-        shuffle($_SESSION["table"]);
-        $_SESSION["table"] = array_combine(range(1, sizeof($_SESSION["table"])), $_SESSION["table"]);
+        $firstname = $_SESSION["firstname"];
+        include("front-end/pages/edit-profile.php");
 
     }
 
 
-    /**
-     * Sets User Information within database
-     * 
-     * Storage of User information
-     */
-    private function setUserInfo()
-    {
-        if (!isset($_SESSION["name"]) && isset($_POST["fullname"])) {
-            $_SESSION["name"] = $_POST["fullname"];
-        }
+    // /**
+    //  * Sets User Information within database
+    //  * 
+    //  * Storage of User information
+    //  */
+    // private function setUserInfo()
+    // {
+    //     if (!isset($_SESSION["name"]) && isset($_POST["fullname"])) {
+    //         $_SESSION["name"] = $_POST["fullname"];
+    //     }
 
-        if (!isset($_SESSION["email"]) && isset($_POST["email"])) {
-            $_SESSION["email"] = $_POST["email"];
-        }
+    //     if (!isset($_SESSION["email"]) && isset($_POST["email"])) {
+    //         $_SESSION["email"] = $_POST["email"];
+    //     }
 
-        if (!isset($_SESSION["password"]) && isset($_POST["password"])) {
-            $_SESSION["password"] = $_POST["password"];
-        }
+    //     if (!isset($_SESSION["password"]) && isset($_POST["password"])) {
+    //         $_SESSION["password"] = $_POST["password"];
+    //     }
 
-        $this->setTable();
-
-    }
+    // }
 
 
     /**
@@ -273,21 +289,8 @@ class AdonisController
      */
     public function showHome()
     {
+        $firstname = $_SESSION["firstname"];
         include("front-end/pages/home.php");
-    }
-    /**
-     * Game Over redirect after user loses game.
-     */
-    public function gameOver($win = false)
-    {
-        $name = $_SESSION["name"];
-        $email = $_SESSION["email"];
-        $password = $_SESSION["password"];
-        $numGuesses = $_SESSION["numGuesses"];
-        $categories = $this->categories;
-        $categoryIDs = $_SESSION["categoryIDs"];
-        $priorGuesses = $_SESSION["priorGuesses"];
-        include("pages/gameover.php");
     }
 
     /**

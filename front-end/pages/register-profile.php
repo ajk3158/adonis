@@ -6,8 +6,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="../styles/app.css">
-  <link rel="stylesheet" href="../styles/register-profile.css">
+  <link rel="stylesheet" href="front-end/styles/app.css">
+  <link rel="stylesheet" href="front-end/styles/register-profile.css">
 
   <!-- Webpage Title -->
   <title>Homepage - ADONIS</title>
@@ -43,8 +43,8 @@
           Login
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="login.html">Login</a>
-          <a class="dropdown-item" href="register-profile.html">Register</a>
+          <a class="dropdown-item" href="?command=showLogin">Login</a>
+          <a class="dropdown-item" href="?command=showRegister">Register</a>
         </div>
       </div>
 
@@ -64,16 +64,18 @@
 
       <small class="form-text">Revolutionize your fashion, Take control of your wear.</small>
 
+      <?php echo $errorMessage; ?>
+      
       <!-- Form to Register Profile -->
-      <form>
+      <form action="?command=register" method="post">
         <div class="form-group">
           <label for="first-name-input">First Name</label>
-          <input type="text" class="form-control form-control-name" id="first-name-input"
+          <input type="text" class="form-control form-control-name" name="firstname" id="first-name-input"
             placeholder="Enter first name">
         </div>
         <div class="form-group">
           <label for="last-name-input">Last Name</label>
-          <input type="text" class="form-control form-control-name" id="last-name-input" placeholder="Enter last name">
+          <input type="text" class="form-control form-control-name" name="lastname" id="last-name-input" placeholder="Enter last name">
         </div>
 
         <div class="form-group">
@@ -85,20 +87,15 @@
         </div>
         <div class="form-group">
           <label for="username">Username</label>
-          <input type="text" class="form-control form-control-name" id="username" placeholder="Username">
+          <input type="text" class="form-control form-control-name" name="username" id="username" placeholder="Username">
         </div>
         <div class="form-group">
           <label for="password">Password</label>
-          <input type="password" class="form-control form-control-name" id="password" placeholder="Password">
+          <input type="password" class="form-control form-control-name" name="password" id="password" placeholder="Password">
         </div>
         <div class="form-group">
           <label for="email-input">Email address</label>
-          <input type="email" class="form-control" id="email-input" placeholder="Enter email">
-        </div>
-        <div class="form-group">
-          <label for="phone">Phone Number</label>
-          <input type="tel" id="phone" class="form-control form-control-number" name="phone" placeholder="###-###-####"
-            pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
+          <input type="email" class="form-control" id="email-input" name="email" placeholder="Enter email">
         </div>
         <button type="submit" class="form-submit-btn btn">Submit</button>
       </form>
