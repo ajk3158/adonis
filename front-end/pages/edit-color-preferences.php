@@ -74,22 +74,36 @@
     </div>
 
 
-    <form>
+    <form action="?command=colorPref" method="post" >
 
       <!--Checkbox code that displays in color preferences-->
+      <!--pass array into edit-color-preferences ABND LOOP -->
       <div class="form-group">
         <label>Color Preferences</label><br>
-        <input type="checkbox" id="color-pref1" class="" name="color-pref1" checked>
-        <label for="color-pref1">Red</label><br>
+        <input type="checkbox" id="blackCheck" name = "blackCheck" value="1">
+        <label for="blackCheck">Black</label><br>
 
-        <input type="checkbox" id="color-pref2" class="" name="color-pref2" checked>
-        <label for="color-pref2">Black</label><br>
+        <input type="checkbox" id="whiteCheck" name = "whiteCheck" value="1">
+        <label for="whiteCheck">White</label><br>
 
-        <input type="checkbox" id="color-pref3" class="" name="color-pref3">
-        <label for="color-pref3">White</label><br>
+        <input type="checkbox" id="redCheck" name = "redCheck" value="1">
+        <label for="redCheck">Red</label><br>
+
+        <input type="checkbox" id="blueCheck" name = "blueCheck" value="1">
+        <label for="blueCheck">Blue</label><br>
+
+        <input type="checkbox" id="brownCheck" name = "brownCheck" value="1">
+        <label for="brownCheck">Brown</label><br>
+
+        <input type="checkbox" id="greyCheck" name = "greyCheck" value="1">
+        <label for="greyCheck">Grey</label><br>
+
+
 
         <!--To DO, collapsable button that shows more color options-->
-        <button class="btn-expand collapsible">...</button>
+        <div>
+          <button class="btn btn-outline-dark">Save</button>
+        </div>
       </div>
       <div class="form-group">
         <!--Color preference link-->
