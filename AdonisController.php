@@ -111,7 +111,7 @@ class AdonisController
             isset($_POST["password"]) && !empty($_POST["password"])
         ) {
 
-            if(preg_match("/^[a-zA-Z0-9\/.-]+@[a-zA-Z0-9\/-]+.[a-zA-Z0-9\/-]+$/", $_POST["email"])){
+            if(preg_match("/^[a-zA-Z0-9\/.-]+@[a-zA-Z0-9\/-]+.[a-zA-Z0-9\/-]+$/", $_POST["email"]) && preg_match("/^.{5,19}$/", $_POST["username"]) && preg_match("/^.{8,}$/", $_POST["password"])){
 
 
             // Check if user is in database
@@ -141,7 +141,7 @@ class AdonisController
                 }
             }} else {
                 $this->errorMessage = "<div class=\"alert alert-danger\" role=\"alert\">
-                Email invalid! Must be in the format example@mail.com!
+                Email must be in the format example@mail.com and username/password length conditions must be satisfied!
                 </div>";
             }
         } else {
@@ -176,12 +176,12 @@ class AdonisController
 
             //username 
             if (isset($_POST["edit_username"]) && !empty($_POST["edit_username"])){
-                if (strlen($_POST["edit_username"]) < 20){
+                if (strlen($_POST["edit_username"]) < 20 && strlen($_POST["edit_username"]) >= 5){
                     $this->db->query("update users set username = $1 where id = $2", $_POST["edit_username"],$_SESSION["id"]);
                 }
                 else{
                     $this->errorMessage = "<div class=\"alert alert-danger\" role=\"alert\">
-                    Username is too long
+                    Username length must be greater than or equal to 5 characters and below 20 characters!
                     </div>";
                 }
             }
@@ -193,12 +193,12 @@ class AdonisController
 
             //password
             if (isset($_POST["edit_password"]) && !empty($_POST["edit_password"])){
-                if (strlen($_POST["edit_password"]) > 8){
+                if (strlen($_POST["edit_password"]) > 7){
                     $this->db->query("update users set password = $1 where id = $2", password_hash($_POST["password"], PASSWORD_DEFAULT),$_SESSION["id"]);
                 }
                 else{
                     $this->errorMessage = "<div class=\"alert alert-danger\" role=\"alert\">
-                    Password is too short
+                    Password length must be greater than 7 characters!
                     </div>";
                 }
             }
@@ -275,8 +275,8 @@ class AdonisController
             isset($_POST["email"]) && !empty($_POST["email"])
         ) {
 
-            if(preg_match("/^[a-zA-Z0-9\/.-]+@[a-zA-Z0-9\/-]+.[a-zA-Z0-9\/-]+$/", $_POST["email"])){
-                
+            if(preg_match("/^[a-zA-Z0-9\/.-]+@[a-zA-Z0-9\/-]+.[a-zA-Z0-9\/-]+$/", $_POST["email"]) && preg_match("/^.{5,19}$/", $_POST["username"]) && preg_match("/^.{8,}$/", $_POST["password"])){
+
 
             // Check if user is in database
             $res = $this->db->query("select * from users where email = $1;", $_POST["email"]);
@@ -292,11 +292,6 @@ class AdonisController
                     password_hash($_POST["password"], PASSWORD_DEFAULT)
                 );
                 $res = $this->db->query("select * from users where email = $1;", $_POST["email"]);
-                $_SESSION["username"] = $_POST["username"];
-                $_SESSION["email"] = $_POST["email"];
-                $_SESSION["age"] = $_POST["age"];
-                $_SESSION["firstname"] = $_POST["firstname"];
-                $_SESSION["lastname"] = $_POST["lastname"];
                 // Send user to the login page
                 $this -> showLogin();
                 return;
@@ -307,7 +302,7 @@ class AdonisController
             }
         }else {
             $this->errorMessage = "<div class=\"alert alert-danger\" role=\"alert\">
-            Email invalid! Must be in the format example@mail.com!
+            Email must be in the format example@mail.com and username/password length conditions must be satisfied!
             </div>";
         }
         } else {
@@ -373,28 +368,14 @@ class AdonisController
 
     }
 
-
-    // /**
-    //  * Sets User Information within database
-    //  * 
-    //  * Storage of User information
-    //  */
-    // private function setUserInfo()
-    // {
-    //     if (!isset($_SESSION["name"]) && isset($_POST["fullname"])) {
-    //         $_SESSION["name"] = $_POST["fullname"];
-    //     }
-
-    //     if (!isset($_SESSION["email"]) && isset($_POST["email"])) {
-    //         $_SESSION["email"] = $_POST["email"];
-    //     }
-
-    //     if (!isset($_SESSION["password"]) && isset($_POST["password"])) {
-    //         $_SESSION["password"] = $_POST["password"];
-    //     }
-
-    // }
-
+    /**
+     * Show the welcome page to the user.
+     */
+    public function create()
+    {
+        $firstname = $_SESSION["firstname"];
+        include("front-end/pages/home.php");
+    }
 
     /**
      * Show the welcome page to the user.

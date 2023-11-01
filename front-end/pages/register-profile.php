@@ -65,7 +65,7 @@
       <small class="form-text">Revolutionize your fashion, Take control of your wear.</small>
 
       <?php echo $errorMessage; ?>
-      
+
       <!-- Form to Register Profile -->
       <form action="?command=register" method="post">
         <div class="form-group">
@@ -88,10 +88,12 @@
         <div class="form-group">
           <label for="username">Username</label>
           <input type="text" class="form-control form-control-name" name="username" id="username" placeholder="Username">
+          <small style="font-size: 12px;">Username length must be greater than or equal to 5 characters and below 20 characters</small>
         </div>
         <div class="form-group">
           <label for="password">Password</label>
           <input type="password" class="form-control form-control-name" name="password" id="password" placeholder="Password">
+          <small style="font-size: 12px;">Password length must be greater than 7 characters</small>
         </div>
         <div class="form-group">
           <label for="email-input">Email address</label>
