@@ -71,7 +71,7 @@
 
         <!-- Email Input -->
         <div class="form-group">
-          <label for="username">Email</label>
+          <label for="email">Email</label>
           <input type="text" class="form-control form-control-name" id="email" name="email"
             placeholder="Example@gmail.com">
         </div>

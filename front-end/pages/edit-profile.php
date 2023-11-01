@@ -1,3 +1,6 @@
+<?php
+  include("AdonisController.php");
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -73,33 +76,32 @@
       </ul>
     </div>
 
-    <!-- Form Displaying Profile Information -->
-    <form>
+    <!-- Form to edit Profile Information -->
+    <form action="?command=updateProfile" method="post">
 
       <div class="form-group">
-        <label for="first-name-input">First Name</label>
-        <input type="text" class="form-control form-control-name " id="first-name-input" placeholder="John" >
+        <label for="edit_firstname">First Name</label>
+        <input type="text" class="form-control form-control-name " id="edit_firstname" name = edit_firstname placeholder="John" >
       </div>
 
       <div class="form-group">
-        <label for="last-name-input">Last Name</label>
-        <input type="text" class="form-control form-control-name" id="last-name-input" placeholder="Doe" >
+        <label for="edit_lastname">Last Name</label>
+        <input type="text" class="form-control form-control-name" id="edit_lastname" name= edit_lastname placeholder="Doe" >
       </div>
 
       <div class="form-group">
-        <label for="age">Age</label>
-        <input type="text" id="age" name="age" class="form-control form-control-name" placeholder="21" >
-
-
-      </div>
-      <div class="form-group">
-        <label for="username">Username</label>
-        <input type="text" class="form-control form-control-name" id="username" placeholder="JohnDoe21" >
+        <label for="edit_age">Age</label>
+        <input type="text" id="edit_age" name="edit_age" class="form-control form-control-name" placeholder="21" >
       </div>
 
       <div class="form-group">
-        <label for="email-input">Email address</label>
-        <input type="email" class="form-control" id="email-input" placeholder="JohnDoe21@gmail.com" >
+        <label for="edit_username">Username</label>
+        <input type="text" class="form-control form-control-name" id="edit_username" name = "edit_username placeholder="JohnDoe21" >
+      </div>
+
+      <div class="form-group">
+        <label for="edit_email">Email address</label>
+        <input type="email" class="form-control" id="edit_email" name = "edit_email" placeholder="JohnDoe21@gmail.com" >
       </div>
      
 

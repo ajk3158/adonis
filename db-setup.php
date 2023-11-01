@@ -32,8 +32,8 @@ $res = pg_query($dbHandle, "create table colorPreferences (
     );");
 $res = pg_query($dbHandle, "create table users (
             id int primary key default nextval('user_seq'),
-            email text,
-            username text,
+            email text unique,
+            username text unique,
             age text,
             firstname text,
             lastname text,

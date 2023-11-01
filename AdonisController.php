@@ -4,6 +4,7 @@ class AdonisController
 {
     private $categories;
     private $db;
+    private $iD;
     private $input = [];
 
     private $errorMessage = "";
@@ -110,6 +111,7 @@ class AdonisController
                 // User was in the database, verify password
                 if (password_verify($_POST["password"], $res[0]["password"])) {
                     // Password was correct
+                    $_SESSION["id"] = $res[0]["id"];
                     $_SESSION["email"] = $res[0]["email"];
                     $_SESSION["username"] = $res[0]["username"];
                     header("Location: ?command=homepage");
@@ -127,6 +129,94 @@ class AdonisController
         }
         // If something went wrong, show the welcome page again
         $this->showLogin();
+    }
+    //update information of specific users in database
+    public function updateProfile(){
+        if (isset($_SESSION["id"])){
+            $res = $this->db->query("select * from users where email = $1;", $_SESSION["id"]);
+
+            //Email update
+            if (isset($_POST["edit_email"]) && !empty($_POST["edit_email"])){
+                if (filter_var($_POST["edit_email"], FILTER_VALIDATE_EMAIL)){
+                    $this->db->query("update users set email = $1 where id = $2", $_POST["edit_email"],$_SESSION["id"]);
+                    $_SESSION["email"] = $_POST["edit_email"];
+                }
+                else{
+                    $this->errorMessage = "<div class=\"alert alert-danger\" role=\"alert\">
+                    Email format is incorrect!
+                    </div>";
+                }
+            }
+            else{
+                $this->errorMessage = "<div class=\"alert alert-danger\" role=\"alert\">
+                Email can not be empty!
+                </div>";
+            }
+
+            //username 
+            if (isset($_POST["edit_username"]) && !empty($_POST["edit_username"])){
+                if (strlen($_POST["edit_username"]) < 20){
+                    $this->db->query("update users set username = $1 where id = $2", $_POST["edit_username"],$_SESSION["id"]);
+                }
+                else{
+                    $this->errorMessage = "<div class=\"alert alert-danger\" role=\"alert\">
+                    Username is too long
+                    </div>";
+                }
+            }
+            else{
+                $this->errorMessage = "<div class=\"alert alert-danger\" role=\"alert\">
+                Username can not be empty!
+                </div>";
+            }
+
+            //password
+            if (isset($_POST["edit_password"]) && !empty($_POST["edit_password"])){
+                if (strlen($_POST["edit_password"]) > 8){
+                    $this->db->query("update users set password = $1 where id = $2", password_hash($_POST["password"], PASSWORD_DEFAULT),$_SESSION["id"]);
+                }
+                else{
+                    $this->errorMessage = "<div class=\"alert alert-danger\" role=\"alert\">
+                    Password is too short
+                    </div>";
+                }
+            }
+            else{
+                $this->errorMessage = "<div class=\"alert alert-danger\" role=\"alert\">
+                Password can not be empty!
+                </div>";
+            }
+
+            //age
+            if (isset($_POST["edit_age"])){
+                if (!empty($_POST["edit_age"])){
+                    $this->db->query("update users set age = $1 where id = $2", $_POST["edit_age"],$_SESSION["id"]);
+                }
+                else{
+                    $this->db->query("update users set age = $1 where id = $2", null,$_SESSION["id"]);
+                }
+            }
+            //firstname
+            if (isset($_POST["edit_firstname"])){
+                if (!empty($_POST["edit_firstname"])){
+                    $this->db->query("update users set firstname = $1 where id = $2", $_POST["edit_firstname"],$_SESSION["id"]);
+                }
+                else{
+                    $this->db->query("update users set firstname = $1 where id = $2", null,$_SESSION["id"]);
+                }
+            }
+
+            //lastname
+            if (isset($_POST["edit_lastname"])){
+                if (!empty($_POST["edit_lastname"])){
+                    $this->db->query("update users set lastname = $1 where id = $2", $_POST["edit_lastname"],$_SESSION["id"]);
+                }
+                else{
+                    $this->db->query("update users set lastname = $1 where id = $2", null,$_SESSION["id"]);
+                }
+            }
+        }
+        
     }
 
     /**
@@ -178,6 +268,8 @@ class AdonisController
         }
         $this -> showRegister();
     }
+
+    
 
     /**
      * Checks user information during log-in
