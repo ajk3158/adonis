@@ -15,7 +15,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
     crossorigin="anonymous"></script>
-  <meta name="author" content="Alex Kim (html, php), Jason Nguyen (html, css)">
+  <meta name="author" content="Alex Kim (html, css, php), Jason Nguyen (html, css)">
   <meta name="description" content="User Login Page. On this page, users will be able to login to their ADONIS profile in order
         to access the website's contents.">
   <meta name="keywords" content="Clothing, Fashion, Registration">
@@ -73,14 +73,14 @@
         <div class="form-group">
           <label for="email">Email</label>
           <input type="email" class="form-control form-control-name" id="email" name="email"
-            placeholder="Example@gmail.com">
+            placeholder="Example@gmail.com" value="<?php echo (isset($email)) ? $email : ''; ?>">
         </div>
 
         <!-- Username Input -->
         <div class="form-group">
           <label for="username">Username</label>
-          <input type="text" class="form-control form-control-name" id="username" name="username"
-            placeholder="Username">
+          <input type="text" class="form-control form-control-name" id="username" name="username" placeholder="Username"
+            value="<?php echo (isset($username)) ? $username : ''; ?>">
         </div>
 
         <!-- Password Input -->

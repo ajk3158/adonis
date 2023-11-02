@@ -1,6 +1,6 @@
 <?php
 // Sources used: https://cs4640.cs.virginia.edu
-// Alex Kim (switch commands, login, logout, register, profile, getAllUsers, homepage, regex, database querying, view color edits, session management), Jason Nguyen (view/edit color preferences (and connection to register), update profile, edit profile, database querying, session management)
+// Alex Kim (Cookies (maintain state of the application), switch commands, login, logout, register, profile, getAllUsers, homepage, regex, database querying, view color edits, session management), Jason Nguyen (view/edit color preferences and their connection to register, update profile, edit profile, database querying, session management)
 class AdonisController
 {
 
@@ -129,6 +129,8 @@ class AdonisController
                         $_SESSION["firstname"] = $res[0]["firstname"];
                         $_SESSION["age"] = $res[0]["age"];
                         $_SESSION["lastname"] = $res[0]["lastname"];
+                        setcookie("email", $_POST["email"], time() + 10800);
+                        setcookie("username", $_POST["username"], time() + 10800);
                         $this->showHome();
                         return;
                     } else {
@@ -266,6 +268,12 @@ class AdonisController
      */
     public function showLogin()
     {
+        if (isset($_COOKIE["email"])) {
+            $email = $_COOKIE["email"];
+        }
+        if (isset($_COOKIE["username"])) {
+            $username = $_COOKIE["username"];
+        }
         $errorMessage = $this->errorMessage;
         include("front-end/pages/login.php");
     }
@@ -420,6 +428,10 @@ class AdonisController
      */
     public function logout()
     {
+        unset($_COOKIE["email"]);
+        setcookie("email", "", time() - 10800);
+        unset($_COOKIE["username"]);
+        setcookie("username", "", time() - 10800);
         session_destroy();
         session_start();
     }

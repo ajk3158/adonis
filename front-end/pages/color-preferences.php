@@ -19,7 +19,7 @@
     integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
     crossorigin="anonymous"></script>
 
-  <meta name="author" content="Alex Kim (php, html, css), Jason Nguyen (html, css, php)">
+  <meta name="author" content="Alex Kim (php, html, css), Jason Nguyen (html, css)">
   <meta name="description" content="this is the color preferences part in a users profile, where
   users are able to specify which colors they prefer">
   <meta name="keywords" content="Clothing, Fashion, Homepage">

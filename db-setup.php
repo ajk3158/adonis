@@ -2,11 +2,18 @@
 // Sources used: https://cs4640.cs.virginia.edu
 // Authors: Alex Kim (database set up, user table creation), Jason Nguyen (color preferences table creation)
 // Note that these are for the local Docker container
-$host = "db";
+
+$host = "localhost";
 $port = "5432";
-$database = "example";
-$user = "localuser";
-$password = "cs4640LocalUser!";
+$database = "ajk5qwb";
+$user = "ajk5qwb";
+$password = "iY6pjYWmL_BT";
+
+// $host = "db";
+// $port = "5432";
+// $database = "example";
+// $user = "localuser";
+// $password = "cs4640LocalUser!";
 
 $dbHandle = pg_connect("host=$host port=$port dbname=$database user=$user password=$password");
 
