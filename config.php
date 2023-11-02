@@ -1,5 +1,7 @@
 <?php
-class Config {
+// Sources used: https://cs4640.cs.virginia.edu
+class Config
+{
     public static $db = [
         "host" => "db",
         "port" => 5432,

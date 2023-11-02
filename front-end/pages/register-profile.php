@@ -18,7 +18,7 @@
     integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
     crossorigin="anonymous"></script>
 
-  <meta name="author" content="Alex Kim, Jason Nguyen">
+  <meta name="author" content="Alex Kim (html, css, php), Jason Nguyen (html)">
   <meta name="description" content="register profile, where users create their profile">
   <meta name="keywords" content="Clothing, Fashion, Homepage">
 
@@ -29,10 +29,10 @@
   <nav class="navbar navbar-expand-lg">
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-target="#navbarNavDropdown"
       aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+      <span class="navbar-toggler-icon"></span\>
     </button>
     <div class="nav-item nav-primary">
-      <a class="nav-link" href="#">ADONIS</a>
+      <a class="nav-link" href="?command=showLogin">ADONIS</a>
     </div>
     <div class="app-navbar-links collapse navbar-collapse" id="navbarNavDropdown">
 
@@ -75,7 +75,8 @@
         </div>
         <div class="form-group">
           <label for="last-name-input">Last Name</label>
-          <input type="text" class="form-control form-control-name" name="lastname" id="last-name-input" placeholder="Enter last name">
+          <input type="text" class="form-control form-control-name" name="lastname" id="last-name-input"
+            placeholder="Enter last name">
         </div>
 
         <div class="form-group">
@@ -87,18 +88,21 @@
         </div>
         <div class="form-group">
           <label for="username">Username</label>
-          <input type="text" class="form-control form-control-name" name="username" id="username" placeholder="Username">
-          <small style="font-size: 12px;">Username length must be greater than or equal to 5 characters and below 20 characters</small>
+          <input type="text" class="form-control form-control-name" name="username" id="username"
+            placeholder="Username">
+          <small style="font-size: 12px;">Username length must be at least 5 characters but below 20 characters</small>
         </div>
         <div class="form-group">
           <label for="password">Password</label>
-          <input type="password" class="form-control form-control-name" name="password" id="password" placeholder="Password">
-          <small style="font-size: 12px;">Password length must be greater than 7 characters</small>
+          <input type="password" class="form-control form-control-name" name="password" id="password"
+            placeholder="Password">
+          <small style="font-size: 12px;">Password length must be at least 8 characters</small>
         </div>
         <div class="form-group">
           <label for="email-input">Email address</label>
           <input type="email" class="form-control" id="email-input" name="email" placeholder="Enter email">
         </div>
+        <!-- Submit Button -->
         <button type="submit" class="form-submit-btn btn">Submit</button>
       </form>
 

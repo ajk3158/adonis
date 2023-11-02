@@ -1,11 +1,14 @@
 <?php
-class Database {
+// Sources used: https://cs4640.cs.virginia.edu
+class Database
+{
     private $dbConnector;
 
     /**
      * Reads configuration from the Config class above
      */
-    public function __construct() {
+    public function __construct()
+    {
         $host = Config::$db["host"];
         $user = Config::$db["user"];
         $database = Config::$db["database"];
@@ -15,7 +18,8 @@ class Database {
         $this->dbConnector = pg_connect("host=$host port=$port dbname=$database user=$user password=$password");
     }
 
-    public function query($query, ...$params) {
+    public function query($query, ...$params)
+    {
         // Use safe querying
         $res = pg_query_params($this->dbConnector, $query, $params);
 

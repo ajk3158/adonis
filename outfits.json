@@ -1,0 +1,28 @@
+{
+    "outfits": {
+      "spring": {
+        "outerwear_colors": ["Light Blue", "Beige", "Light Pink", "Lavender"],
+        "shirt_colors": ["Pastel Yellow", "Mint Green", "Light Gray", "Coral"],
+        "pants_colors": ["Light Khaki", "Light Gray", "White", "Pastel Blue"],
+        "shoes_colors": ["White", "Tan", "Light Brown", "Light Gray"]
+      },
+      "summer": {
+        "outerwear_colors": ["White", "Light Gray", "Beige", "Light Blue"],
+        "shirt_colors": ["Light Yellow", "Sky Blue", "Light Green", "White"],
+        "pants_colors": ["Light Khaki", "White", "Light Gray", "Beige"],
+        "shoes_colors": ["White", "Beige", "Light Gray", "Light Blue"]
+      },
+      "fall": {
+        "outerwear_colors": ["Brown", "Dark Green", "Maroon", "Navy"],
+        "shirt_colors": ["Olive", "Burnt Orange", "Mustard Yellow", "Dark Red"],
+        "pants_colors": ["Dark Brown", "Olive", "Burgundy", "Dark Gray"],
+        "shoes_colors": ["Brown", "Dark Gray", "Black", "Navy"]
+      },
+      "winter": {
+        "outerwear_colors": ["Black", "Navy", "Dark Gray", "Charcoal"],
+        "shirt_colors": ["White", "Black", "Gray", "Navy"],
+        "pants_colors": ["Black", "Dark Gray", "Navy", "Charcoal"],
+        "shoes_colors": ["Black", "Dark Brown", "Navy", "Charcoal"]
+      }
+    }
+  }

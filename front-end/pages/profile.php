@@ -17,7 +17,7 @@
     integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
     crossorigin="anonymous"></script>
 
-  <meta name="author" content="Alex Kim, Jason Nguyen">
+  <meta name="author" content="Alex Kim (html, css), Jason Nguyen (html, css)">
   <meta name="description" content="User Profile page for Adonis members where they can view personal information">
   <meta name="keywords" content="Clothing, Fashion, Homepage">
 
@@ -77,12 +77,14 @@
 
       <div class="form-group">
         <label for="first-name-input">First Name</label>
-        <input type="text" class="form-control form-control-name " id="first-name-input" placeholder=<?= $firstname ?> disabled>
+        <input type="text" class="form-control form-control-name " id="first-name-input" placeholder=<?= $firstname ?>
+          disabled>
       </div>
 
       <div class="form-group">
         <label for="last-name-input">Last Name</label>
-        <input type="text" class="form-control form-control-name" id="last-name-input" placeholder=<?= $lastname ?> disabled>
+        <input type="text" class="form-control form-control-name" id="last-name-input" placeholder=<?= $lastname ?>
+          disabled>
       </div>
 
       <div class="form-group">
@@ -100,10 +102,12 @@
         <label for="email-input">Email address</label>
         <input type="email" class="form-control" id="email-input" placeholder=<?= $email ?> disabled>
       </div>
-     
+
 
       <!-- Edit Profile Button-->
-        <button class="btn btn-outline-dark" type="submit">Edit Profile</button>
+      <button class="btn btn-outline-dark m-1" type="submit">Edit Profile</button>
+      <!-- See all Users Button -->
+      <button class="btn btn-outline-dark m-1" formaction="?command=getAllUsers" type="submit">See all Users!</button>
     </form>
 
   </div>

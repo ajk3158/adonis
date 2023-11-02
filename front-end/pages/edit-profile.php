@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,7 +17,7 @@
     integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
     crossorigin="anonymous"></script>
 
-  <meta name="author" content="Alex Kim, Jason Nguyen">
+  <meta name="author" content="Alex Kim (php), Jason Nguyen (html, css)">
   <meta name="description" content="User Profile page for Adonis members where they can view personal information">
   <meta name="keywords" content="Clothing, Fashion, Homepage">
 
@@ -78,36 +77,35 @@
 
       <div class="form-group">
         <label for="edit_firstname">First Name</label>
-        <input type="text" class="form-control form-control-name " id="edit_firstname" name = edit_firstname placeholder="first name" >
+        <input type="text" class="form-control form-control-name " id="edit_firstname" name=edit_firstname
+          placeholder="first name">
       </div>
 
       <div class="form-group">
         <label for="edit_lastname">Last Name</label>
-        <input type="text" class="form-control form-control-name" id="edit_lastname" name= edit_lastname placeholder="last name" >
+        <input type="text" class="form-control form-control-name" id="edit_lastname" name=edit_lastname
+          placeholder="last name">
       </div>
 
       <div class="form-group">
         <label for="edit_age">Age</label>
-        <input type="text" id="edit_age" name="edit_age" class="form-control form-control-name" placeholder="##" >
+        <input type="text" id="edit_age" name="edit_age" class="form-control form-control-name" placeholder="##">
       </div>
 
       <div class="form-group">
         <label for="edit_username">Username</label>
-        <input type="text" class="form-control form-control-name" id="edit_username" name = "edit_username" placeholder="example" >
+        <input type="text" class="form-control form-control-name" id="edit_username" name="edit_username"
+          placeholder="example">
       </div>
 
       <div class="form-group">
         <label for="edit_email">Email address</label>
-        <input type="email" class="form-control" id="edit_email" name = "edit_email" placeholder="example@gmail.com" >
+        <input type="email" class="form-control" id="edit_email" name="edit_email" placeholder="example@gmail.com">
       </div>
-     
+
       <div>
-          <button class="btn btn-outline-dark" type="submit">Update</button>
+        <button class="btn btn-outline-dark" type="submit">Update</button>
       </div>
-      <!-- Edit Profile Button
-      <div class="form-group">
-        <a class="forgot-link" href="#"><u>Edit Profile</u></a>
-      </div>-->
     </form>
 
   </div>

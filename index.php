@@ -1,12 +1,10 @@
 <?php
-
-error_reporting(E_ALL);
-ini_set("display_errors", 1);
-
+// Sources used: https://cs4640.cs.virginia.edu, Published Site: https://cs4640.cs.virginia.edu/ajk5qwb/ADONIS/
+// Author: Alex Kim, Jason Nguyen
 spl_autoload_register(function ($classname) {
     include "$classname.php";
 });
-        
+
 
 $adonis = new AdonisController($_GET);
 

@@ -19,7 +19,7 @@
     integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
     crossorigin="anonymous"></script>
 
-  <meta name="author" content="Alex Kim, Jason Nguyen">
+  <meta name="author" content="Alex Kim (php, html), Jason Nguyen (html)">
   <meta name="description" content="this is the color preferences part in a users profile, where
   users are able to specify which colors they prefer">
   <meta name="keywords" content="Clothing, Fashion, Homepage">
@@ -74,40 +74,26 @@
     </div>
 
 
-    <form action="?command=colorPref" method="post" >
+    <form action="?command=colorPref" method="post">
 
       <!--Checkbox code that displays in color preferences-->
-      <!--pass array into edit-color-preferences ABND LOOP -->
       <div class="form-group">
         <label>Color Preferences</label><br>
-        <input type="checkbox" id="blackCheck" name = "blackCheck" value="1">
-        <label for="blackCheck">Black</label><br>
+        <?php for ($x = 0; $x < sizeof($colors); $x++):
+          $color = $colors[$x]["column_name"];
+          if ($color == "id") {
+            continue;
+          } ?>
+          <input type="checkbox" id="<?= $color ?>Check" name="<?= $color ?>Check" value="1">
+          <label for="<?= $color ?>Check">
+            <?= $color ?>
+          </label><br>
+        <?php endfor; ?>
 
-        <input type="checkbox" id="whiteCheck" name = "whiteCheck" value="1">
-        <label for="whiteCheck">White</label><br>
-
-        <input type="checkbox" id="redCheck" name = "redCheck" value="1">
-        <label for="redCheck">Red</label><br>
-
-        <input type="checkbox" id="blueCheck" name = "blueCheck" value="1">
-        <label for="blueCheck">Blue</label><br>
-
-        <input type="checkbox" id="brownCheck" name = "brownCheck" value="1">
-        <label for="brownCheck">Brown</label><br>
-
-        <input type="checkbox" id="greyCheck" name = "greyCheck" value="1">
-        <label for="greyCheck">Grey</label><br>
-
-
-
-        <!--To DO, collapsable button that shows more color options-->
+        <!-- Saves color preferences -->
         <div>
           <button class="btn btn-outline-dark">Save</button>
         </div>
-      </div>
-      <div class="form-group">
-        <!--Color preference link-->
-        <a class="forgot-link" href="#"><u>Edit Color Preferences</u></a>
       </div>
     </form>
 

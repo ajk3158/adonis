@@ -19,7 +19,7 @@
     integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
     crossorigin="anonymous"></script>
 
-  <meta name="author" content="Alex Kim, Jason Nguyen">
+  <meta name="author" content="Alex Kim (php, html, css), Jason Nguyen (html, css, php)">
   <meta name="description" content="this is the color preferences part in a users profile, where
   users are able to specify which colors they prefer">
   <meta name="keywords" content="Clothing, Fashion, Homepage">
@@ -78,30 +78,29 @@
 
       <!--Checkbox code that displays in color preferences-->
       <div class="form-group">
-        
+
         <label>Color Preferences</label><br>
 
-        <?php foreach($colors as $color => $preferred):
-          if($color == "id") {
+        <?php foreach ($colors as $color => $preferred):
+          if ($color == "id") {
             continue;
-          }?>
-            <input type="checkbox" id="color<?= $color ?>" name = "color<?= $color ?>"  disabled <?php 
-                  if ($preferred == "true" ){
-                    echo 'checked';
-                  }
-                    ?>>
-        <label for="color<?= $color ?>"><?= $color ?></label><br>
+          } ?>
+          <input type="checkbox" id="color<?= $color ?>" name="color<?= $color ?>" disabled <?php
+              if ($preferred == "t") {
+                echo 'checked';
+              }
+              ?>>
+          <label for="color<?= $color ?>">
+            <?= $color ?>
+          </label><br>
         <?php endforeach; ?>
 
-        <!--To DO, collapsable button that shows more color options-->
+        <!-- Edit Color preferences -->
         <div>
-          <button  class="btn btn-outline-dark">Edit Color</button>
+          <button class="btn btn-outline-dark">Edit Color Preferences</button>
         </div>
       </div>
-      <div class="form-group">
-        <!--Color preference link-->
-        <a class="forgot-link" href=""><u>Edit Color Preferences</u></a>
-      </div>
+
     </form>
 
   </div>

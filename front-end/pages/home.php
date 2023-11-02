@@ -18,7 +18,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
     crossorigin="anonymous"></script>
-  <meta name="author" content="Alex Kim, Jason Nguyen">
+  <meta name="author" content="Alex Kim (php, html, css)">
   <meta name="description"
     content="Profile Home page - On this web page, users will be able to experience all of the core functionalities ADONIS offers when they first enter the site">
   <meta name="keywords" content="Clothing, Fashion, Registration">
@@ -48,7 +48,7 @@
       <div class="nav-item dropdown nav-profile">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-bs-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">
-          Welcome, <?=$firstname?>
+          Welcome, <?= $firstname ?>
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
           <a class="dropdown-item" href="?command=viewProfile">View Profile</a>
@@ -59,7 +59,7 @@
 
     </div>
   </nav>
-
+  <?php var_dump($firstname) ?>
   <!-- HomePage Content -->
   <div style="margin-top: 6rem">
     <div class="row">

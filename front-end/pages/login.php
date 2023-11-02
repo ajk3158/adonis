@@ -15,7 +15,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
     crossorigin="anonymous"></script>
-  <meta name="author" content="Alex Kim, Jason Nguyen">
+  <meta name="author" content="Alex Kim (html, php), Jason Nguyen (html, css)">
   <meta name="description" content="User Login Page. On this page, users will be able to login to their ADONIS profile in order
         to access the website's contents.">
   <meta name="keywords" content="Clothing, Fashion, Registration">
@@ -41,7 +41,7 @@
           Login
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-        <a class="dropdown-item" href="?command=showLogin">Login</a>
+          <a class="dropdown-item" href="?command=showLogin">Login</a>
           <a class="dropdown-item" href="?command=showRegister">Register</a>
         </div>
       </div>
@@ -71,7 +71,7 @@
 
         <!-- Email Input -->
         <div class="form-group">
-          <label for="username">Email</label>
+          <label for="email">Email</label>
           <input type="email" class="form-control form-control-name" id="email" name="email"
             placeholder="Example@gmail.com">
         </div>
@@ -90,13 +90,11 @@
             placeholder="Password">
         </div>
         <div>
+          <!-- Login and Registration buttons -->
           <button type="submit" class="form-submit-btn btn">Login</button>
           <button formaction="?command=showRegister" class="form-submit-btn btn">Register</button>
         </div>
 
-        <div class="form-group">
-          <a class="forgot-link" href="#"><u>Forgot Your Password?</u></a>
-        </div>
       </form>
 
     </section>

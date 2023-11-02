@@ -1,5 +1,6 @@
 <?php
-
+// Sources used: https://cs4640.cs.virginia.edu
+// Authors: Alex Kim (database set up, user table creation), Jason Nguyen (color preferences table creation)
 // Note that these are for the local Docker container
 $host = "db";
 $port = "5432";
@@ -25,7 +26,7 @@ $res = pg_query($dbHandle, "drop table if exists users;");
 // Create sequences
 $res = pg_query($dbHandle, "create sequence user_seq;");
 
-// Create tablse
+// Create user and color preferences table
 $res = pg_query($dbHandle, "create table colorPreferences (
             id int primary key,
             black boolean,
@@ -35,6 +36,7 @@ $res = pg_query($dbHandle, "create table colorPreferences (
             brown boolean,
             grey boolean
     );");
+
 $res = pg_query($dbHandle, "create table users (
             id int primary key default nextval('user_seq'),
             email text unique,
@@ -44,14 +46,3 @@ $res = pg_query($dbHandle, "create table users (
             lastname text,
             password text
         );");
-
-// Read json and insert the trivia questions into the database
-// Note: the URL is updated due to changes on the CS web server
-/* $questions = json_decode(
-     file_get_contents("http://ford.cs.virginia.edu/trivia.json"), true);*/
-
-// $res = pg_prepare($dbHandle, "myinsert", "insert into questions (question, answer) values 
-//     ($1, $2);");
-// foreach ($questions as $q) {
-//     $res = pg_execute($dbHandle, "myinsert", [$q["question"], $q["answer"]]);
-// }
