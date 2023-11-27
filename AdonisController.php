@@ -119,7 +119,8 @@ class AdonisController
 
                 // Check if user is in database
                 $res = $this->db->query("select * from users where email = $1;", $_POST["email"]);
-                if (empty($res)) {
+                $name = $this->db->query("select * from users where username = $1",$_POST["username"] );
+                if (empty($res) || empty($name)) {
                     $this->errorMessage = "<div class=\"alert alert-danger\" role=\"alert\">
                 Account doesn't exist!
                 </div>";

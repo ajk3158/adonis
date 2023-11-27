@@ -47,7 +47,7 @@
         </li>
       </ul>
 
-      <div class="nav-item dropdown nav-profile">
+      <div class="nav-item dropdown nav-profile" id="profileDropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-bs-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">
           <?php echo $firstname ?>'s Profile
@@ -64,7 +64,7 @@
   <div style="margin-top: 6rem">
 
     <!--Side navigation bar for user profile-->
-    <div class=navbar-side>
+    <div class=navbar-side id="colorPreferencesSideNav">
       <ul style="list-style-type: none; margin-top: 5rem;">
         <li><a href="?command=viewProfile">Profile</a></li>
         <li><a href="#">Password & Security</a></li>
@@ -74,30 +74,65 @@
     </div>
 
 
-    <form action="?command=colorPref" method="post">
+    <form action="?command=colorPref" method="post" id="colorPreferences">
 
       <!--Checkbox code that displays in color preferences-->
-      <div class="form-group">
+      <div class="form-group" >
         <label>Color Preferences</label><br>
         <?php for ($x = 0; $x < sizeof($colors); $x++):
           $color = $colors[$x]["column_name"];
           if ($color == "id") {
             continue;
           } ?>
-          <input type="checkbox" id="<?= $color ?>Check" name="<?= $color ?>Check" value="1">
+          <input type="checkbox" id="<?= $color ?>Check" name="<?= $color ?>Check" value="1" onchange="changeBackgroundColor(this)">
           <label for="<?= $color ?>Check">
             <?= $color ?>
           </label><br>
         <?php endfor; ?>
-
         <!-- Saves color preferences -->
-        <div>
+        <div id="colorPreferencesDiv">
           <button class="btn btn-outline-dark">Save</button>
         </div>
       </div>
     </form>
 
   </div>
+  <script>
+    function changeBackgroundColor(checkbox) {
+    // Get the color associated with the checkbox
+    var color = checkbox.id.replace("Check", "").toLowerCase();
+
+    // Get the colorPreferencesDiv
+    var colorPreferencesDiv = document.getElementById("colorPreferences");
+    var colorPreferencesNav = document.getElementById("colorPreferencesSideNav");
+
+    // Change the background color based on checkbox state
+    if (checkbox.checked) {
+      colorPreferencesDiv.style.backgroundColor = color;
+      colorPreferencesNav.style.backgroundColor = color;
+      setTimeout(function() {
+        colorPreferencesDiv.style.backgroundColor = "";
+        colorPreferencesNav.style.backgroundColor = "";
+      }, 300);
+    } else {
+      // You can set a default background color when the checkbox is unchecked
+      colorPreferencesDiv.style.backgroundColor = "";
+      colorPreferencesNav.style.backgroundColor = "";
+    }
+  }
+
+    const profileDropdown = document.getElementById('profileDropdown');
+
+    profileDropdown.addEventListener('mouseenter', () => {
+      // Show the dropdown menu when the cursor enters the nav item
+      profileDropdown.querySelector('.dropdown-menu').classList.add('show');
+    });
+
+    profileDropdown.addEventListener('mouseleave', () => {
+      // Hide the dropdown menu when the cursor leaves the nav item
+      profileDropdown.querySelector('.dropdown-menu').classList.remove('show');
+    });
+  </script>
 </body>
 
 </html>

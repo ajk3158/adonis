@@ -19,7 +19,11 @@
   <meta name="description" content="User Login Page. On this page, users will be able to login to their ADONIS profile in order
         to access the website's contents.">
   <meta name="keywords" content="Clothing, Fashion, Registration">
-
+  <style>
+    .error {
+      color: red;
+    }
+  </style>
 </head>
 
 <body class="text-center">
@@ -35,7 +39,7 @@
     <div class="app-navbar-links collapse navbar-collapse" id="navbarNavDropdown">
 
       <!-- Navigation Bar Dropdown Bar -->
-      <div class="nav-item dropdown nav-profile">
+      <div class="nav-item dropdown nav-profile" id="profileDropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-bs-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">
           Login
@@ -66,14 +70,16 @@
       <?php echo $errorMessage; ?>
 
       <!-- Form for User Login -->
+
       <form action="?command=login" method="post">
 
 
         <!-- Email Input -->
         <div class="form-group">
           <label for="email">Email</label>
-          <input type="email" class="form-control form-control-name" id="email" name="email"
+          <input type="text" class="form-control form-control-name" id="email" name="email"
             placeholder="Example@gmail.com" value="<?php echo (isset($email)) ? $email : ''; ?>">
+          <span id="emailError" class="error"></span>
         </div>
 
         <!-- Username Input -->
@@ -81,6 +87,7 @@
           <label for="username">Username</label>
           <input type="text" class="form-control form-control-name" id="username" name="username" placeholder="Username"
             value="<?php echo (isset($username)) ? $username : ''; ?>">
+          <span id="usernameError" class="error"></span>
         </div>
 
         <!-- Password Input -->
@@ -88,18 +95,93 @@
           <label for="password">Password</label>
           <input type="password" class="form-control form-control-name" id="password" name="password"
             placeholder="Password">
+          <span id="passwordError" class="error"></span>
         </div>
         <div>
           <!-- Login and Registration buttons -->
-          <button type="submit" class="form-submit-btn btn">Login</button>
+          <button type="submit" class="form-submit-btn btn" id="loginButton">Login</button>
           <button formaction="?command=showRegister" class="form-submit-btn btn">Register</button>
         </div>
 
       </form>
 
+
     </section>
 
   </div>
+  <script>
+
+    //sources used: https://developer.mozilla.org/en-US/docs/Web/API/Document/DOMContentLoaded_event
+    //https://stackoverflow.com/questions/46155/how-can-i-validate-an-email-address-in-javascript
+    //hover nav bar top right
+    document.addEventListener("DOMContentLoaded", function () {
+      const loginButton = document.getElementById("loginButton");
+      const form = document.querySelector("form");
+      loginButton.addEventListener("click", function (event) {
+        // Flag to determine whether the form should be submitted
+        let isValid = true;
+
+        // Validate Email
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const emailInput = document.getElementById("email");
+        const emailError = document.getElementById("emailError");
+        if (!emailInput.value.trim()) {
+          emailError.innerText = "Email is required";
+          isValid = false;
+        } else {
+          if (emailRegex.test(emailInput.value.trim()) === false) {
+            document.getElementById('emailError').textContent = 'input is not a valid email address';
+            isValid = false;
+          }
+          else {
+            emailError.innerText = "";
+          }
+          
+        }
+
+        // Validate Username
+        const usernameInput = document.getElementById("username");
+        const usernameError = document.getElementById("usernameError");
+        if (!usernameInput.value.trim()) {
+          usernameError.innerText = "Username is required";
+          isValid = false;
+        } else {
+          usernameError.innerText = "";
+        }
+
+        // Validate Password
+        const passwordInput = document.getElementById("password");
+        const passwordError = document.getElementById("passwordError");
+        if (!passwordInput.value.trim()) {
+          passwordError.innerText = "Password is required";
+          isValid = false;
+        } else {
+          passwordError.innerText = "";
+        }
+
+        // Submit the form only if isValid is true
+        if (!isValid) {
+          event.preventDefault(); // Prevent form submission
+        }
+      });
+    });
+
+
+
+    const profileDropdown = document.getElementById('profileDropdown');
+
+    profileDropdown.addEventListener('mouseenter', () => {
+      // Show the dropdown menu when the cursor enters the nav item
+      profileDropdown.querySelector('.dropdown-menu').classList.add('show');
+    });
+
+    profileDropdown.addEventListener('mouseleave', () => {
+      // Hide the dropdown menu when the cursor leaves the nav item
+      profileDropdown.querySelector('.dropdown-menu').classList.remove('show');
+    });
+
+
+  </script>>
 </body>
 
 </html>
