@@ -64,7 +64,7 @@
   <div style="margin-top: 6rem">
 
     <!--Side navigation bar for user profile-->
-    <div class=navbar-side>
+    <div class=navbar-side id="colorPreferencesSideNav">
       <ul style="list-style-type: none; margin-top: 5rem;">
         <li><a href="?command=viewProfile">Profile</a></li>
         <li><a href="#">Password & Security</a></li>
@@ -74,10 +74,10 @@
     </div>
 
 
-    <form action="?command=colorPref" method="post">
+    <form action="?command=colorPref" method="post" id="colorPreferences">
 
       <!--Checkbox code that displays in color preferences-->
-      <div class="form-group" id="colorPreferences">
+      <div class="form-group" >
         <label>Color Preferences</label><br>
         <?php for ($x = 0; $x < sizeof($colors); $x++):
           $color = $colors[$x]["column_name"];
@@ -104,16 +104,20 @@
 
     // Get the colorPreferencesDiv
     var colorPreferencesDiv = document.getElementById("colorPreferences");
+    var colorPreferencesNav = document.getElementById("colorPreferencesSideNav");
 
     // Change the background color based on checkbox state
     if (checkbox.checked) {
       colorPreferencesDiv.style.backgroundColor = color;
+      colorPreferencesNav.style.backgroundColor = color;
       setTimeout(function() {
         colorPreferencesDiv.style.backgroundColor = "";
+        colorPreferencesNav.style.backgroundColor = "";
       }, 300);
     } else {
       // You can set a default background color when the checkbox is unchecked
       colorPreferencesDiv.style.backgroundColor = "";
+      colorPreferencesNav.style.backgroundColor = "";
     }
   }
 

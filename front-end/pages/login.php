@@ -71,7 +71,7 @@
 
       <!-- Form for User Login -->
 
-      <form id="loginForm" action="?command=login" method="post" onsubmit="return validateForm()">
+      <form action="?command=login" method="post">
 
 
         <!-- Email Input -->
@@ -99,7 +99,7 @@
         </div>
         <div>
           <!-- Login and Registration buttons -->
-          <button type="submit" class="form-submit-btn btn">Login</button>
+          <button type="submit" class="form-submit-btn btn" id="loginButton">Login</button>
           <button formaction="?command=showRegister" class="form-submit-btn btn">Register</button>
         </div>
 
@@ -112,8 +112,59 @@
   <script>
 
     //sources used: https://developer.mozilla.org/en-US/docs/Web/API/Document/DOMContentLoaded_event
+    //https://stackoverflow.com/questions/46155/how-can-i-validate-an-email-address-in-javascript
     //hover nav bar top right
+    document.addEventListener("DOMContentLoaded", function () {
+      const loginButton = document.getElementById("loginButton");
+      const form = document.querySelector("form");
+      loginButton.addEventListener("click", function (event) {
+        // Flag to determine whether the form should be submitted
+        let isValid = true;
 
+        // Validate Email
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const emailInput = document.getElementById("email");
+        const emailError = document.getElementById("emailError");
+        if (!emailInput.value.trim()) {
+          emailError.innerText = "Email is required";
+          isValid = false;
+        } else {
+          if (emailRegex.test(emailInput.value.trim()) === false) {
+            document.getElementById('emailError').textContent = 'input is not a valid email address';
+            isValid = false;
+          }
+          else {
+            emailError.innerText = "";
+          }
+          
+        }
+
+        // Validate Username
+        const usernameInput = document.getElementById("username");
+        const usernameError = document.getElementById("usernameError");
+        if (!usernameInput.value.trim()) {
+          usernameError.innerText = "Username is required";
+          isValid = false;
+        } else {
+          usernameError.innerText = "";
+        }
+
+        // Validate Password
+        const passwordInput = document.getElementById("password");
+        const passwordError = document.getElementById("passwordError");
+        if (!passwordInput.value.trim()) {
+          passwordError.innerText = "Password is required";
+          isValid = false;
+        } else {
+          passwordError.innerText = "";
+        }
+
+        // Submit the form only if isValid is true
+        if (!isValid) {
+          event.preventDefault(); // Prevent form submission
+        }
+      });
+    });
 
 
 
@@ -128,42 +179,6 @@
       // Hide the dropdown menu when the cursor leaves the nav item
       profileDropdown.querySelector('.dropdown-menu').classList.remove('show');
     });
-
-    /*function validateForm() {
-      let works = true;
-      const email = document.getElementById('email').value;
-      const username = document.getElementById('username').value;
-      const password = document.getElementById('password').value;
-      if (username === '') {
-        document.getElementById('usernameError').textContent = 'Username cannot be empty';
-        works = false;
-      }
-      else {
-        if (username.length < 5 || username.length >= 20) {
-          document.getElementById('usernameError').textContent = 'Username length must be greater than or equal to 5 characters and below 20 characters!';
-          works = false;
-        }
-      }
-
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (email === '') {
-        document.getElementById('emailError').textContent = 'Email cannot be empty';
-        works = false;
-      }
-      else {
-        if (emailRegex.test(email) === false) {
-          document.getElementById('emailError').textContent = 'input is not a valid email address';
-          works = false;
-        }
-      }
-      if (password.length < 7){
-        document.getElementById('passwordError').textContent = 'password input is not at least 7 characters';
-        works = false;
-      }
-
-      return works;
-    }*/
-
 
 
   </script>>
