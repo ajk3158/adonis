@@ -131,6 +131,7 @@ class AdonisController
                         $_SESSION["lastname"] = $res[0]["lastname"];
                         setcookie("email", $_POST["email"], time() + 10800);
                         setcookie("username", $_POST["username"], time() + 10800);
+                        echo json_encode(["status" => "success"]);
                         $this->showHome();
                         return;
                     } else {

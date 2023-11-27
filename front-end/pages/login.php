@@ -19,7 +19,11 @@
   <meta name="description" content="User Login Page. On this page, users will be able to login to their ADONIS profile in order
         to access the website's contents.">
   <meta name="keywords" content="Clothing, Fashion, Registration">
-
+  <style>
+    .error {
+      color: red;
+    }
+  </style>
 </head>
 
 <body class="text-center">
@@ -35,7 +39,7 @@
     <div class="app-navbar-links collapse navbar-collapse" id="navbarNavDropdown">
 
       <!-- Navigation Bar Dropdown Bar -->
-      <div class="nav-item dropdown nav-profile">
+      <div class="nav-item dropdown nav-profile" id="profileDropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-bs-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">
           Login
@@ -66,14 +70,16 @@
       <?php echo $errorMessage; ?>
 
       <!-- Form for User Login -->
-      <form action="?command=login" method="post">
+
+      <form id="loginForm" action="?command=login" method="post" onsubmit="return validateForm()">
 
 
         <!-- Email Input -->
         <div class="form-group">
           <label for="email">Email</label>
-          <input type="email" class="form-control form-control-name" id="email" name="email"
+          <input type="text" class="form-control form-control-name" id="email" name="email"
             placeholder="Example@gmail.com" value="<?php echo (isset($email)) ? $email : ''; ?>">
+          <span id="emailError" class="error"></span>
         </div>
 
         <!-- Username Input -->
@@ -81,6 +87,7 @@
           <label for="username">Username</label>
           <input type="text" class="form-control form-control-name" id="username" name="username" placeholder="Username"
             value="<?php echo (isset($username)) ? $username : ''; ?>">
+          <span id="usernameError" class="error"></span>
         </div>
 
         <!-- Password Input -->
@@ -88,6 +95,7 @@
           <label for="password">Password</label>
           <input type="password" class="form-control form-control-name" id="password" name="password"
             placeholder="Password">
+          <span id="passwordError" class="error"></span>
         </div>
         <div>
           <!-- Login and Registration buttons -->
@@ -97,9 +105,68 @@
 
       </form>
 
+
     </section>
 
   </div>
+  <script>
+
+    //sources used: https://developer.mozilla.org/en-US/docs/Web/API/Document/DOMContentLoaded_event
+    //hover nav bar top right
+
+
+
+
+    const profileDropdown = document.getElementById('profileDropdown');
+
+    profileDropdown.addEventListener('mouseenter', () => {
+      // Show the dropdown menu when the cursor enters the nav item
+      profileDropdown.querySelector('.dropdown-menu').classList.add('show');
+    });
+
+    profileDropdown.addEventListener('mouseleave', () => {
+      // Hide the dropdown menu when the cursor leaves the nav item
+      profileDropdown.querySelector('.dropdown-menu').classList.remove('show');
+    });
+
+    /*function validateForm() {
+      let works = true;
+      const email = document.getElementById('email').value;
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+      if (username === '') {
+        document.getElementById('usernameError').textContent = 'Username cannot be empty';
+        works = false;
+      }
+      else {
+        if (username.length < 5 || username.length >= 20) {
+          document.getElementById('usernameError').textContent = 'Username length must be greater than or equal to 5 characters and below 20 characters!';
+          works = false;
+        }
+      }
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (email === '') {
+        document.getElementById('emailError').textContent = 'Email cannot be empty';
+        works = false;
+      }
+      else {
+        if (emailRegex.test(email) === false) {
+          document.getElementById('emailError').textContent = 'input is not a valid email address';
+          works = false;
+        }
+      }
+      if (password.length < 7){
+        document.getElementById('passwordError').textContent = 'password input is not at least 7 characters';
+        works = false;
+      }
+
+      return works;
+    }*/
+
+
+
+  </script>>
 </body>
 
 </html>

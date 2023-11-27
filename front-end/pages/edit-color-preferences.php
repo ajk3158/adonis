@@ -47,7 +47,7 @@
         </li>
       </ul>
 
-      <div class="nav-item dropdown nav-profile">
+      <div class="nav-item dropdown nav-profile" id="profileDropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-bs-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">
           <?php echo $firstname ?>'s Profile
@@ -89,7 +89,6 @@
             <?= $color ?>
           </label><br>
         <?php endfor; ?>
-
         <!-- Saves color preferences -->
         <div>
           <button class="btn btn-outline-dark">Save</button>
@@ -98,6 +97,21 @@
     </form>
 
   </div>
+  <script>
+    
+
+    const profileDropdown = document.getElementById('profileDropdown');
+
+    profileDropdown.addEventListener('mouseenter', () => {
+      // Show the dropdown menu when the cursor enters the nav item
+      profileDropdown.querySelector('.dropdown-menu').classList.add('show');
+    });
+
+    profileDropdown.addEventListener('mouseleave', () => {
+      // Hide the dropdown menu when the cursor leaves the nav item
+      profileDropdown.querySelector('.dropdown-menu').classList.remove('show');
+    });
+  </script>
 </body>
 
 </html>
