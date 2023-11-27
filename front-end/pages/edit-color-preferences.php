@@ -77,20 +77,20 @@
     <form action="?command=colorPref" method="post">
 
       <!--Checkbox code that displays in color preferences-->
-      <div class="form-group">
+      <div class="form-group" id="colorPreferences">
         <label>Color Preferences</label><br>
         <?php for ($x = 0; $x < sizeof($colors); $x++):
           $color = $colors[$x]["column_name"];
           if ($color == "id") {
             continue;
           } ?>
-          <input type="checkbox" id="<?= $color ?>Check" name="<?= $color ?>Check" value="1">
+          <input type="checkbox" id="<?= $color ?>Check" name="<?= $color ?>Check" value="1" onchange="changeBackgroundColor(this)">
           <label for="<?= $color ?>Check">
             <?= $color ?>
           </label><br>
         <?php endfor; ?>
         <!-- Saves color preferences -->
-        <div>
+        <div id="colorPreferencesDiv">
           <button class="btn btn-outline-dark">Save</button>
         </div>
       </div>
@@ -98,7 +98,24 @@
 
   </div>
   <script>
-    
+    function changeBackgroundColor(checkbox) {
+    // Get the color associated with the checkbox
+    var color = checkbox.id.replace("Check", "").toLowerCase();
+
+    // Get the colorPreferencesDiv
+    var colorPreferencesDiv = document.getElementById("colorPreferences");
+
+    // Change the background color based on checkbox state
+    if (checkbox.checked) {
+      colorPreferencesDiv.style.backgroundColor = color;
+      setTimeout(function() {
+        colorPreferencesDiv.style.backgroundColor = "";
+      }, 300);
+    } else {
+      // You can set a default background color when the checkbox is unchecked
+      colorPreferencesDiv.style.backgroundColor = "";
+    }
+  }
 
     const profileDropdown = document.getElementById('profileDropdown');
 
