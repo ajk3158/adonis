@@ -109,7 +109,7 @@
 
       <div class="form-group">
         <label for="edit_email">Email address</label>
-        <input type="email" class="form-control" id="edit_email" name="edit_email" placeholder="example@gmail.com">
+        <input type="text" class="form-control" id="edit_email" name="edit_email" placeholder="example@gmail.com">
         <span id="emailError" class="error"></span>
       </div>
 
