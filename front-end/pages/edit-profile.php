@@ -20,7 +20,11 @@
   <meta name="author" content="Alex Kim (php), Jason Nguyen (html, css)">
   <meta name="description" content="User Profile page for Adonis members where they can view personal information">
   <meta name="keywords" content="Clothing, Fashion, Homepage">
-
+  <style>
+    .error {
+      color: red;
+    }
+  </style>
 </head>
 
 <body class="text-center">
@@ -43,7 +47,8 @@
         </li>
       </ul>
 
-      <div class="nav-item dropdown nav-profile">
+      <!--Sidebar dropdown-->
+      <div class="nav-item dropdown nav-profile" id="profileDropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-bs-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">
           <?php echo $firstname ?>'s Profile
@@ -73,34 +78,39 @@
     </div>
 
     <!-- Form to edit Profile Information -->
-    <form action="?command=updateProfile" method="post">
+    <form id="profileForm" action="?command=updateProfile" method="post">
 
       <div class="form-group">
         <label for="edit_firstname">First Name</label>
-        <input type="text" class="form-control form-control-name " id="edit_firstname" name=edit_firstname
-          placeholder="first name">
+        <input type="text" class="form-control form-control-name" id="edit_firstname" name="edit_firstname"
+          placeholder="First name">
+        <span id="firstnameError" class="error"></span>
       </div>
 
       <div class="form-group">
         <label for="edit_lastname">Last Name</label>
-        <input type="text" class="form-control form-control-name" id="edit_lastname" name=edit_lastname
-          placeholder="last name">
+        <input type="text" class="form-control form-control-name" id="edit_lastname" name="edit_lastname"
+          placeholder="Last name">
+        <span id="lastnameError" class="error"></span>
       </div>
 
       <div class="form-group">
         <label for="edit_age">Age</label>
         <input type="text" id="edit_age" name="edit_age" class="form-control form-control-name" placeholder="##">
+        <span id="ageError" class="error"></span>
       </div>
 
       <div class="form-group">
         <label for="edit_username">Username</label>
         <input type="text" class="form-control form-control-name" id="edit_username" name="edit_username"
-          placeholder="example">
+          placeholder="Username">
+        <span id="usernameError" class="error"></span>
       </div>
 
       <div class="form-group">
         <label for="edit_email">Email address</label>
         <input type="email" class="form-control" id="edit_email" name="edit_email" placeholder="example@gmail.com">
+        <span id="emailError" class="error"></span>
       </div>
 
       <div>
@@ -108,7 +118,94 @@
       </div>
     </form>
 
+
   </div>
+  <script>
+
+    /*Sources used: https://developer.mozilla.org/en-US/docs/Web/API/Element/mouseenter_event
+    https://developer.mozilla.org/en-US/docs/Web/API/Element/mouseleave_event
+    */
+    function validateForm() {
+      // Reset previous error messages
+      document.getElementById('firstnameError').textContent = '';
+      document.getElementById('lastnameError').textContent = '';
+      document.getElementById('ageError').textContent = '';
+      document.getElementById('usernameError').textContent = '';
+      document.getElementById('emailError').textContent = '';
+
+      // Get form data
+      const firstname = document.getElementById('edit_firstname').value;
+      const lastname = document.getElementById('edit_lastname').value;
+      const age = document.getElementById('edit_age').value;
+      const username = document.getElementById('edit_username').value;
+      const email = document.getElementById('edit_email').value;
+
+      // Perform client-side input validation
+      let works = true;
+      if (firstname === '') {
+        document.getElementById('firstnameError').textContent = 'First Name cannot be empty';
+        works = false;
+      }
+
+      if (lastname === '') {
+        document.getElementById('lastnameError').textContent = 'Last Name cannot be empty';
+        works = false;
+      }
+
+      if (age === '') {
+        document.getElementById('ageError').textContent = 'Age cannot be empty';
+        works = false;
+      }
+
+      if (username === '') {
+        document.getElementById('usernameError').textContent = 'Username cannot be empty';
+        works = false;
+      }
+      else {
+        if (username.length < 5 || username.length >= 20) {
+          document.getElementById('usernameError').textContent = 'Username length must be greater than or equal to 5 characters and below 20 characters!';
+          works = false;
+        }
+      }
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (email === '') {
+        document.getElementById('emailError').textContent = 'Email cannot be empty';
+        works = false;
+      }
+      else {
+        if (emailRegex.test(email) === false) {
+          document.getElementById('emailError').textContent = 'input is not a valid email address';
+          works = false;
+        }
+      }
+
+      return works;
+    }
+
+    document.getElementById('profileForm').addEventListener('submit', function (event) {//anonymous function
+      // Prevent the default form submission
+      event.preventDefault();
+      if (validateForm()) {
+        // If validation passes, manually submit the form
+        event.target.submit();
+      }
+    });
+
+    //hover nav bar top right
+    const profileDropdown = document.getElementById('profileDropdown');
+
+    profileDropdown.addEventListener('mouseenter', () => {
+      // Show the dropdown menu when the cursor enters the nav item
+      profileDropdown.querySelector('.dropdown-menu').classList.add('show');
+    });
+
+    profileDropdown.addEventListener('mouseleave', () => {//arrow function
+      // Hide the dropdown menu when the cursor leaves the nav item
+      profileDropdown.querySelector('.dropdown-menu').classList.remove('show');
+    });
+
+  </script>
 </body>
 
 </html>
