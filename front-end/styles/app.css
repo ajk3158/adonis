@@ -209,6 +209,14 @@ label {
     border: none;
 }
 
+.card-title{
+    text-shadow:
+		-0.5px -0.5px 0 #000,
+		0.5px -0.5px 0 #000,
+		-0.5px 0.5px 0 #000,
+		0.5px 0.5px 0 #000;
+}
+
 
 /* Mobile */
 @media screen and (max-width: 768px) {

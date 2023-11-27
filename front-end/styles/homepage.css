@@ -3,6 +3,16 @@ body {
     background-color: var(--primary-color);
 }
 
+p {
+    color: white;
+    font-size: 12px;
+}
+
+h3 {
+    color: white !important;
+    text-shadow: 0.5px 0.5px 0 black, -0.5px -0.5px 0 black, 0.5px -0.5px 0 black, -0.5px 0.5px 0 black;
+}
+
 .form-control {
     width: 18rem !important;
 }
@@ -39,6 +49,30 @@ div.col-sm>div.container:not(:first-child) {
 
 .card {
     margin: 0 5px;
+}
+
+.card-text {
+    color: black;
+}
+
+.card-title {
+    font-size: xx-large;
+}
+
+.Winter>.card-body {
+    background: #E9E3C9;
+}
+
+.Fall>.card-body {
+    background: #BD3E2F;
+}
+
+.Spring>.card-body {
+    background: #4A8764;
+}
+
+.Summer>.card-body {
+    background: #EFFD5F;
 }
 
 @media screen and (max-width: 900px) {

@@ -20,7 +20,58 @@
   <meta name="author" content="Alex Kim (html, css), Jason Nguyen (html, css)">
   <meta name="description" content="User Profile page for Adonis members where they can view personal information">
   <meta name="keywords" content="Clothing, Fashion, Homepage">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
+  <script>
+
+    function showUsers(userList) {
+      $("#seeAllUsers").text("Collapse Table");
+
+      $("#user-table").append("<thead><tr><th>ID</th><th>First Name</th><th>Last Name</th><th>Age</th><th>Email</th></tr></thead><tbody>");
+
+      for (let i = 0; i < userList.length; i++) {
+        let row = "<tr><td>" + userList[i].id + "</td><td>" + userList[i].firstname + "</td><td>" + userList[i].lastname + "</td><td>" + userList[i].age + "</td><td>" + userList[i].email + "</td></tr>";
+        $("#user-table").append(row);
+      }
+
+      $("#user-table").append("<tbody>");
+
+    }
+
+    // function collapseUsers(){
+    //   if ($("#user-table").children().length > 0) {
+
+    //     $("#seeAllUsers").on("click", function () {
+    //       $("#user-table").empty();
+
+
+    //     });
+    //   }
+    // }
+
+    $(document).ready(function () {
+      // Event handler for when the game starts
+      $("#seeAllUsers").on("click", function () {
+        if ($("#user-table").children().length > 0) {
+          $("#user-table").empty();
+          $("#seeAllUsers").text("SEE ALL USERS");
+        } else {
+          // Query the back-end
+          $.get(
+            "index.php",
+            { command: "getAllUsers" },
+            function (response) {
+              // Handle the response to display the users
+              console.log(response);
+              showUsers(response);
+              // collapseUsers();
+            }
+          );
+        }
+      });
+
+    });
+  </script>
 </head>
 
 <body class="text-center">
@@ -38,9 +89,9 @@
         <li class="nav-item">
           <a class="nav-link" href="#">Explore by Color</a>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a class="nav-link" href="#">Explore by Season</a>
-        </li>
+        </li> -->
       </ul>
 
       <div class="nav-item dropdown nav-profile">
@@ -107,8 +158,15 @@
       <!-- Edit Profile Button-->
       <button class="btn btn-outline-dark m-1" type="submit">Edit Profile</button>
       <!-- See all Users Button -->
-      <button class="btn btn-outline-dark m-1" formaction="?command=getAllUsers" type="submit">See all Users!</button>
+      <button class="btn btn-outline-dark m-1" id="seeAllUsers" type="button">See all Users</button>
     </form>
+
+    <section class="table-container">
+      <table id="user-table">
+
+      </table>
+
+    </section>
 
   </div>
 </body>

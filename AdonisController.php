@@ -74,6 +74,12 @@ class AdonisController
             case "colorPref":
                 $this->colorPref();
                 break;
+            case "saveOutfits":
+                $this->saveOutfits();
+                break;
+            case "getOutfits":
+                $this->getOutfits();
+                break;
             case "updateProfile":
                 $this->updateProfile();
                 break;
@@ -165,6 +171,7 @@ class AdonisController
                 if (filter_var($_POST["edit_email"], FILTER_VALIDATE_EMAIL)) {
                     $this->db->query("update users set email = $1 where id = $2", $_POST["edit_email"], $_SESSION["id"]);
                     $_SESSION["email"] = $_POST["edit_email"];
+                    setcookie("email", $_POST["edit_email"], time() + 10800);
                 } else {
                     $this->errorMessage = "<div class=\"alert alert-danger\" role=\"alert\">
                     Email format is incorrect!
@@ -180,6 +187,8 @@ class AdonisController
             if (isset($_POST["edit_username"]) && !empty($_POST["edit_username"])) {
                 if (strlen($_POST["edit_username"]) < 20 && strlen($_POST["edit_username"]) >= 5) {
                     $this->db->query("update users set username = $1 where id = $2", $_POST["edit_username"], $_SESSION["id"]);
+                    $_SESSION["username"] = $_POST["edit_username"];
+                    setcookie("username", $_POST["edit_username"], time() + 10800);
                 } else {
                     $this->errorMessage = "<div class=\"alert alert-danger\" role=\"alert\">
                     Username length must be greater than or equal to 5 characters and below 20 characters!
@@ -289,12 +298,9 @@ class AdonisController
         $this->db->query("alter table userTable drop column username;");
         $allUserData = $this->db->query("select * from userTable;");
 
-
-        $jsonResponse = json_encode($allUserData);
-
         header('Content-Type: application/json');
 
-        echo $jsonResponse;
+        echo json_encode($allUserData);
     }
 
     /**
@@ -419,6 +425,14 @@ class AdonisController
      */
     public function showHome()
     {
+        $colors = $this->db->query("select * from colorPreferences where id = $1;", $_SESSION["id"]);
+        $userColors = [];
+        foreach($colors[0] as $color=>$bool){
+            if($color == 'id' || $bool == 'f'){
+                continue;
+            }
+            array_push($userColors, $color);
+        }
         $firstname = $_SESSION["firstname"];
         include("front-end/pages/home.php");
     }
@@ -435,5 +449,25 @@ class AdonisController
         session_destroy();
         session_start();
     }
+
+
+    // public function saveOutfits()
+    // {
+    //     // User was not there, so insert them
+    //     $this->db->query(
+    //         "insert into users (email, username, age, firstname, lastname, password) values ($1, $2, $3, $4, $5, $6);",
+    //         $_POST["email"],
+    //         $_POST["username"],
+    //         $_POST["age"],
+    //         $_POST["firstname"],
+    //         $_POST["lastname"],
+    //         password_hash($_POST["password"], PASSWORD_DEFAULT)
+    //     );
+    // }
+
+    // public function getOutfits()
+    // {
+
+    // }
 
 }
